@@ -10,21 +10,15 @@ export class Manager {
         this.list.push(project)
     }
 
-    // Create list of outstanding tasks
-    oustanding(){
-        let outstand = this.list.map( (item) => {
-            item.outstanding == true
-            return item
-        })
+     // Create list of outstanding tasks
+     checkOutstanding(){
+        let outstand = this.list.filter( (item) => item.outstanding == true )
         return outstand
     }
 
     // Create list of completed tasks
-    complete(){
-        let completed = this.list.map( (item) => {
-            item.outstanding == false
-            return item
-        })
+    checkComplete(){
+        let completed = this.list.filter( (item) => item.outstanding == false)
         return completed
     }
 }

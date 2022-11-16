@@ -1,13 +1,15 @@
 import { Project } from "./project";
 import { Task  } from "./task";
 import { Manager } from "./projectManager";
-import { createProject } from "./dom"
+import { addProjects } from "./dom"
+import { layout } from "./layout"
 import './styles.css';
 
 let proj = new Project("shop", "carry out early morning", "tomorrow");
 let task = new Task("milk", "green", "ASAP");
 let task1 = new Task("cheese", "blue", "ASAP");
 
+task.outstanding = false
 // allows edit of details
 // task.edit("id", 10)
 // task.edit("title", 10000)
@@ -35,9 +37,12 @@ proj2.list.forEach((item)=>item.dueDate = "Complete")
 manager.add(proj)
 manager.add(proj2)
 
-manager.list.forEach((proj) =>{
-    createProject(proj)
-    proj.list.forEach((task) => {
-        // console.log(`Task: ${task.title}`)
-    })
+manager.list.forEach((projectObject) =>{
+    // pass each project through
+   // addProjects(projectObject)
+})
+
+
+document.addEventListener('DOMContentLoaded', () => {
+    layout()
 })
