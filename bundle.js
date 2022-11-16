@@ -126,7 +126,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _pro
   \************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"Project\": () => (/* binding */ Project)\n/* harmony export */ });\nclass Project {\n    // set up class\n    constructor(title, desciption, dueDate){\n        this.title = title\n        this.desciption = desciption\n        this.dueDate = dueDate\n    }\n    // empty list of tasks\n    list = []\n    \n    // Add to task list\n    add = (task) => {\n        this.list.push(task)\n    }\n\n    // Create list of outstanding tasks\n    oustanding(){\n        let outstanding = this.list.map((item)=>{\n            return item.outstanding == true\n        })\n        return outstanding\n    }\n}\n\n//# sourceURL=webpack://todolist/./src/project.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"Project\": () => (/* binding */ Project)\n/* harmony export */ });\nclass Project {\n    // set up class\n    constructor(title, desciption, dueDate){\n        this.title = title\n        this.desciption = desciption\n        this.dueDate = dueDate\n        this.outstanding = true\n    }\n\n    // empty list of tasks\n    list = []\n    \n    // Add to task list\n    add(task){\n        // set id of task bassed on this projects length of list\n        task.id = this.list.length\n        this.list.push(task)\n    }\n\n    // Create list of outstanding tasks\n    oustanding(){\n        let outstanding = this.list.map( (item) => {\n            item.outstanding == true\n            return item\n        })\n        return outstanding\n    }\n\n    // Create list of completed tasks\n    complete(){\n        let completed = this.list.map( (item) => {\n            item.outstanding == false\n            return item\n        })\n        return completed\n    }\n}\n\n//# sourceURL=webpack://todolist/./src/project.js?");
 
 /***/ }),
 
@@ -136,7 +136,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
   \*********************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"Task\": () => (/* binding */ Task)\n/* harmony export */ });\nclass Task{\n    // create class items\n    constructor(title, desciption, dueDate, outstanding = true){\n        this.title = title\n        this.desciption = desciption\n        this.dueDate = dueDate\n        this.outstanding = outstanding\n    }\n}\n\n//# sourceURL=webpack://todolist/./src/task.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"Task\": () => (/* binding */ Task)\n/* harmony export */ });\nclass Task{\n    // create class items\n    constructor(title, desciption, dueDate){\n        this.title = title\n        this.desciption = desciption\n        this.dueDate = dueDate\n        this.outstanding = true\n        this.id = \"\"\n    }\n}\n\n//# sourceURL=webpack://todolist/./src/task.js?");
 
 /***/ })
 
