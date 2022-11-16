@@ -1,31 +1,42 @@
-import {printTouch} from "./touch.js"
+import { Project } from "./project";
+import { Task  } from "./task";
+import { Manager } from "./projectManager";
 import './styles.css';
 
 
+let proj = new Project("shop", "carry out early morning", "tomorrow");
+let task = new Task("milk", "green", "ASAP");
+let task1 = new Task("cheese", "blue", "ASAP");
 
-class Project {
-    constructor(title, desciption, dueDate){
-        this.title = title
-        this.desciption = desciption
-        this.dueDate = dueDate
-    }
-    details(){
-        console.log(`${this.title} is due ${this.dueDate}`)
-    }
-}
+// allows edit of details
+// task.edit("id", 10)
+// task.edit("title", 10000)
 
-const FFProject = {
-    project(title, desciption, dueDate){
-        
-    }
-}
+let proj2 = new Project("garden", "carry out early morning", "tomorrow")
+let task2 = new Task("mow", "grass", "ASAP")
+let task12 = new Task("cut", "tree", "ASAP")
 
+const manager = new Manager
 
+proj.add(task)
+proj.add(task1)
 
-let proj = new Project("shop", "carry out early morning", "tomorrow")
+proj2.add(task2)
+proj2.add(task12)
 
-proj.details()
+// proj.list.forEach((item)=>console.log(item.title))
+// proj2.list.forEach((item)=>console.log(item.title))
 
-proj.title = "mow"
+proj2.list.forEach((item)=>item.dueDate = "Complete")
 
-console.log(proj)
+// console.log(proj2.oustanding())
+
+manager.add(proj)
+manager.add(proj2)
+
+manager.list.forEach((proj) =>{
+    console.log(`Project: ${proj.title}`)
+    proj.list.forEach((task) => {
+        console.log(`Task: ${task.title}`)
+    })
+})
