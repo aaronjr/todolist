@@ -1,8 +1,8 @@
 import { Project } from "./project";
 import { Task  } from "./task";
 import { Manager } from "./projectManager";
+import { createProject } from "./dom"
 import './styles.css';
-
 
 let proj = new Project("shop", "carry out early morning", "tomorrow");
 let task = new Task("milk", "green", "ASAP");
@@ -16,6 +16,7 @@ let proj2 = new Project("garden", "carry out early morning", "tomorrow")
 let task2 = new Task("mow", "grass", "ASAP")
 let task12 = new Task("cut", "tree", "ASAP")
 
+// create holder of projects
 const manager = new Manager
 
 proj.add(task)
@@ -35,8 +36,8 @@ manager.add(proj)
 manager.add(proj2)
 
 manager.list.forEach((proj) =>{
-    console.log(`Project: ${proj.title}`)
+    createProject(proj)
     proj.list.forEach((task) => {
-        console.log(`Task: ${task.title}`)
+        // console.log(`Task: ${task.title}`)
     })
 })

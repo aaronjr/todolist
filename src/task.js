@@ -8,7 +8,7 @@ export class Task {
         this.id = ""
     }
 
-    edit(where, edit){
+    edit (where, edit) {
         // change any details except id
         where === "id" ? this.id = this.id : this[where] = edit
     }
