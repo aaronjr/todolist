@@ -1,8 +1,13 @@
 // create element with html tag, class and textContents
-export function createEle(tag, className = "", text = ""){
+export function createEle(tag, className = "", text = "", id = ""){
     let element = document.createElement(tag)
     element.className = className
     element.textContent = text
+
+    if(!( id == "" )){
+        element.setAttribute("id", id)
+    }
+    
     return element
 }
 

@@ -37,12 +37,9 @@ proj2.list.forEach((item)=>item.dueDate = "Complete")
 manager.add(proj)
 manager.add(proj2)
 
-manager.list.forEach((projectObject) =>{
-    // pass each project through
-   // addProjects(projectObject)
-})
-
-
 document.addEventListener('DOMContentLoaded', () => {
     layout()
 })
+
+
+export { manager }
