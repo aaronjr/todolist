@@ -116,17 +116,27 @@ eval("\n\n/* istanbul ignore next  */\nfunction styleTagTransform(css, styleElem
   \**********************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _touch_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./touch.js */ \"./src/touch.js\");\n/* harmony import */ var _styles_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./styles.css */ \"./src/styles.css\");\n\n\n\n\n\nclass Project {\n    constructor(title, desciption, dueDate){\n        this.title = title\n        this.desciption = desciption\n        this.dueDate = dueDate\n    }\n    details(){\n        console.log(`${this.title} is due ${this.dueDate}`)\n    }\n}\n\nconst FFProject = {\n    project(title, desciption, dueDate){\n        \n    }\n}\n\n\n\nlet proj = new Project(\"shop\", \"carry out early morning\", \"tomorrow\")\n\nproj.details()\n\nproj.title = \"mow\"\n\nconsole.log(proj)\n\n//# sourceURL=webpack://todolist/./src/index.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _project__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./project */ \"./src/project.js\");\n/* harmony import */ var _task__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./task */ \"./src/task.js\");\n/* harmony import */ var _styles_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./styles.css */ \"./src/styles.css\");\n\n\n\n\n\nlet proj = new _project__WEBPACK_IMPORTED_MODULE_0__.Project(\"shop\", \"carry out early morning\", \"tomorrow\")\nlet task = new _task__WEBPACK_IMPORTED_MODULE_1__.Task(\"milk\", \"green\", \"ASAP\")\nlet task1 = new _task__WEBPACK_IMPORTED_MODULE_1__.Task(\"cheese\", \"blue\", \"ASAP\")\n\nlet proj2 = new _project__WEBPACK_IMPORTED_MODULE_0__.Project(\"garden\", \"carry out early morning\", \"tomorrow\")\nlet task2 = new _task__WEBPACK_IMPORTED_MODULE_1__.Task(\"mow\", \"grass\", \"ASAP\")\nlet task12 = new _task__WEBPACK_IMPORTED_MODULE_1__.Task(\"cut\", \"tree\", \"ASAP\")\n\n// proj.add(task)\n// proj.add(task1)\n\nproj2.add(task2)\nproj2.add(task12)\n\n// proj.list.forEach((item)=>console.log(item.title))\n// proj2.list.forEach((item)=>console.log(item.title))\n\n// proj2.list.forEach((item)=>item.dueDate = \"Complete\")\n\nconsole.log(proj2.oustanding())\n\n//# sourceURL=webpack://todolist/./src/index.js?");
 
 /***/ }),
 
-/***/ "./src/touch.js":
-/*!**********************!*\
-  !*** ./src/touch.js ***!
-  \**********************/
+/***/ "./src/project.js":
+/*!************************!*\
+  !*** ./src/project.js ***!
+  \************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"printTouch\": () => (/* binding */ printTouch)\n/* harmony export */ });\nfunction printTouch(){\n\n}\n\n//# sourceURL=webpack://todolist/./src/touch.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"Project\": () => (/* binding */ Project)\n/* harmony export */ });\nclass Project {\n    // set up class\n    constructor(title, desciption, dueDate){\n        this.title = title\n        this.desciption = desciption\n        this.dueDate = dueDate\n    }\n    // empty list of tasks\n    list = []\n    \n    // Add to task list\n    add = (task) => {\n        this.list.push(task)\n    }\n\n    // Create list of outstanding tasks\n    oustanding(){\n        let outstanding = this.list.map((item)=>{\n            return item.outstanding == true\n        })\n        return outstanding\n    }\n}\n\n//# sourceURL=webpack://todolist/./src/project.js?");
+
+/***/ }),
+
+/***/ "./src/task.js":
+/*!*********************!*\
+  !*** ./src/task.js ***!
+  \*********************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"Task\": () => (/* binding */ Task)\n/* harmony export */ });\nclass Task{\n    // create class items\n    constructor(title, desciption, dueDate, outstanding = true){\n        this.title = title\n        this.desciption = desciption\n        this.dueDate = dueDate\n        this.outstanding = outstanding\n    }\n}\n\n//# sourceURL=webpack://todolist/./src/task.js?");
 
 /***/ })
 
