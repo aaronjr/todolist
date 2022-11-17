@@ -1,27 +1,43 @@
 import { createEle, loop } from "./createElements"
 import { manager } from './index'
-import { addProjectForm } from "./forms"
+import { addProjectForm, addTaskForm } from "./forms"
 
-// add projects to main page, where is where to append
-export function addProjects(where, obj){
+// add projects to content section, where is where to append
+export function addProjects(content, objs, projectId){
+    // empty content box
+    while(content.firstChild){
+        content.removeChild(content.lastChild)
+    }
 
-    // create a "box" for each task
-    let box = createEle("div", "box", "")
-    let list = createEle("ul", "task-list", obj.title)
+    objs.forEach( (obj) => {
+        // create a "box" for each task
+        let box = createEle("div", "box", "")
+        let list = createEle("ul", "task-list", obj.title)
 
-    let listitems = [
-        ['li', 'list-item', `Description: ${obj.desciption}`],
-        ['li', 'list-item', `Due: ${obj.dueDate}`]
-    ]
-   
-    // add ul to box element
-    box.append(list)
+        let listitems = [
+            ['li', 'list-item', `Description: ${obj.desciption}`],
+            ['li', 'list-item', `Due: ${obj.dueDate}`]
+        ]
 
-    // add to body and box div
-    loop(listitems, box)
+        // add ul to box element
+        box.append(list)
 
-    // add divs to "where"
-    where.append(box)
+        // add to body and box div
+        loop(listitems, box)
+
+        // add divs to ".content"
+        content.append(box)
+    })
+    
+
+    let addTask = createEle('button', 'addTask', 'Add task')
+    addTask.addEventListener('click', () => {
+        if(!(document.querySelector('.addTaskForm'))){
+            addTaskForm(content, projectId)
+        }
+    })
+
+    content.append(addTask)
 }
 
 export function loadSidebar(side, objs, content){
@@ -79,12 +95,8 @@ export function getTasks(where, id){
     }
 
     // get the project that needs to be loaded.
-    let toLoad = manager.list[id]
+    let thisProject = manager.list[id]
 
-    // add each todo to content div
-    toLoad.checkOutstanding().forEach((toDo) => {
-        // pass through each item and where to append
-        addProjects(where, toDo)
-    })
-    
+    // pass through each item and where to append
+    addProjects(where, thisProject.checkOutstanding(), id)
 }
