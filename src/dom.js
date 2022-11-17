@@ -10,6 +10,8 @@ export function addProjects(content, objs, projectId){
         content.removeChild(content.lastChild)
     }
 
+    const projectDetailsDiv = createEle('div', 'projectDetailsDiv', '')
+
     // add project name to page
     const projectDetails = [
         ['h1', 'projectTitle', `${manager.list[projectId].title}`],
@@ -17,7 +19,8 @@ export function addProjects(content, objs, projectId){
         ['p', 'projectDueDate', `${manager.list[projectId].dueDate}`],
         ['button', 'editProject', 'Edit project']
     ]
-    loop(projectDetails, content)
+    loop(projectDetails, projectDetailsDiv)
+    content.append(projectDetailsDiv)
 
     const editProject = document.querySelector('.editProject')
     editProject.addEventListener('click', () => {
@@ -34,7 +37,9 @@ export function addProjects(content, objs, projectId){
 
         let listitems = [
             ['li', 'list-item', `Description: ${obj.desciption}`],
-            ['li', 'list-item', `Due: ${obj.dueDate}`]
+            ['li', 'list-item', `Due: ${obj.dueDate}`],
+            ['button', 'editTaskButton', 'Edit task'],
+            ['button', 'CompleteTaskButton', 'Complete']
         ]
 
         // add ul to box element

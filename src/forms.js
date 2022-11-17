@@ -6,7 +6,6 @@ import { Task } from "./task"
 
 export function addProjectForm(where, content){
     const form = createEle('form', 'addProjectForm', '')
-    sideDiv = where
     // list of needed items
     const formElements = [
         ['input', 'projectName', 'addProjectDetails',''],
@@ -93,8 +92,9 @@ export function editProjectForm (content, project) {
 
     loopForm(formElements, form)
 
-    form.addEventListener('submit', (e) => {
+    let projectDetailsDiv = document.querySelector('.projectDetailsDiv')
 
+    form.addEventListener('submit', (e) => {
         // prevent submit
         e.preventDefault()
 
@@ -120,5 +120,5 @@ export function editProjectForm (content, project) {
         // reload sidebar incase name was changed
         loadSidebar(side, manager.checkOutstanding(), content)
     })
-    content.append(form)
+    projectDetailsDiv.append(form)
 }
