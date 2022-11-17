@@ -16,7 +16,9 @@ body{
     background-color: rgb(87, 87, 87);
     grid-column-start: 1;
     grid-column-end: 3;
-    display: flex;
+    display: grid;
+    place-items: center;
+    
 }
 
 .side{
@@ -38,6 +40,7 @@ body{
     text-align: center;
     align-self: center;
     justify-self: center;
+    font-size: xx-large;
 }
 
 /* sidebar */

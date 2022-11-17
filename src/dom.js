@@ -1,5 +1,6 @@
 import { createEle, loop } from "./createElements"
 import { manager } from './index'
+import { addProjectForm } from "./forms"
 
 // add projects to main page, where is where to append
 export function addProjects(where, obj){
@@ -23,17 +24,50 @@ export function addProjects(where, obj){
     where.append(box)
 }
 
-export function loadSidebar(where, objs){
-    // create a list
+export function loadSidebar(side, objs, content){
+
+    // remove each child to avoid duplication from content box
+    while(side.firstChild){
+        side.removeChild(side.lastChild)
+    }
+
+    // create a Node list
     let list = createEle("ul", "list", "Projects")
 
-    // pass over each item and its title to the sidebar list
+    // pass over each item and add its title to the sidebar list
     objs.forEach( (project) => {
         list.append(createEle('li', 'project-item', `${project.title}`, `${project.id}`))
     })
 
     // append to list
-    where.append(list)
+    side.append(list)
+
+    // create  a button and form
+    // button for sidebar, add event listener and add to page
+    let addProjectButton = createEle('button', 'addProject', '+')
+    addProjectButton.addEventListener('click', () => {
+        if(!(document.querySelector('.addProjectForm'))){
+            // load the correct todo list from the projects
+            addProjectForm(side, content)
+        }
+    })
+    side.append(addProjectButton)
+
+    // get back items and add event listeners
+    // using event listeners load the todo list of each project
+    const projectTitles = document.querySelectorAll('.project-item')
+    projectTitles.forEach( (item) => {
+        item.addEventListener('click', () => {
+            // pass the id number and the node of where
+            // the content should be loaded ".content"
+            getTasks(content, item.getAttribute("id"))
+
+            // loader header to top of content page
+            // can't add inside function as it'll duplicate
+            // or be erased when clearing children.
+            content.append(createEle('p', 'projectTitle', `${item.textContent}`))
+        })
+    })
 }
 
 // find the correct project

@@ -26,7 +26,7 @@ export function createFormEle(tag,  name, className = "", inner = ""){
     let element = document.createElement(tag)
     element.name = name
     element.className = className
-    element.textContext = inner
+    element.textContent = inner
     return element
 }
 
