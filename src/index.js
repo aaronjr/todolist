@@ -11,9 +11,9 @@ let task1 = new Task("cheese", "blue", "ASAP");
 // hide one task
 task.outstanding = false
 
-let proj2 = new Project("garden", "carry out early morning", "tomorrow")
+let proj2 = new Project("garden", "carry out tonight", "tonight")
 let task2 = new Task("mow", "grass", "ASAP")
-let task12 = new Task("cut", "tree", "ASAP")
+let task12 = new Task("cut", "tree", "soon")
 
 // create holder of projects
 const manager = new Manager
@@ -31,13 +31,4 @@ document.addEventListener('DOMContentLoaded', () => {
     layout()
 })
 
-
 export { manager }
-
-// proj.list.forEach((item)=>console.log(item.title))
-// proj2.list.forEach((item)=>console.log(item.title))
-
-// proj2.list.forEach((item)=>item.dueDate = "Complete")
-
-// console.log(proj2.oustanding())
-

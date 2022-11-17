@@ -1,17 +1,35 @@
 import { createEle, loop } from "./createElements"
 import { manager } from './index'
-import { addProjectForm, addTaskForm } from "./forms"
+import { addProjectForm, addTaskForm, editProjectForm } from "./forms"
 
 // add projects to content section, where is where to append
 export function addProjects(content, objs, projectId){
+
     // empty content box
     while(content.firstChild){
         content.removeChild(content.lastChild)
     }
 
+    // add project name to page
+    const projectDetails = [
+        ['h1', 'projectTitle', `${manager.list[projectId].title}`],
+        ['p', 'projectDescription', `${manager.list[projectId].description}`],
+        ['p', 'projectDueDate', `${manager.list[projectId].dueDate}`],
+        ['button', 'editProject', 'Edit project']
+    ]
+    loop(projectDetails, content)
+
+    const editProject = document.querySelector('.editProject')
+    editProject.addEventListener('click', () => {
+        editProjectForm(content, manager.list[projectId])
+        editProject.style.display = 'none'
+    })
+    
+    
     objs.forEach( (obj) => {
+        // console.log(obj.id)
         // create a "box" for each task
-        let box = createEle("div", "box", "")
+        let box = createEle("div", "box", "", obj.id)
         let list = createEle("ul", "task-list", obj.title)
 
         let listitems = [
@@ -34,6 +52,7 @@ export function addProjects(content, objs, projectId){
     addTask.addEventListener('click', () => {
         if(!(document.querySelector('.addTaskForm'))){
             addTaskForm(content, projectId)
+            addTask.style.display = 'none'
         }
     })
 
@@ -64,6 +83,7 @@ export function loadSidebar(side, objs, content){
     addProjectButton.addEventListener('click', () => {
         if(!(document.querySelector('.addProjectForm'))){
             // load the correct todo list from the projects
+            addProjectButton.style.display = "none"
             addProjectForm(side, content)
         }
     })
@@ -77,11 +97,6 @@ export function loadSidebar(side, objs, content){
             // pass the id number and the node of where
             // the content should be loaded ".content"
             getTasks(content, item.getAttribute("id"))
-
-            // loader header to top of content page
-            // can't add inside function as it'll duplicate
-            // or be erased when clearing children.
-            content.append(createEle('p', 'projectTitle', `${item.textContent}`))
         })
     })
 }

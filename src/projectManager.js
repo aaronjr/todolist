@@ -21,4 +21,5 @@ export class Manager {
         let completed = this.list.filter( (item) => item.outstanding == false)
         return completed
     }
+
 }
