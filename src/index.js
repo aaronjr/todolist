@@ -1,7 +1,6 @@
 import { Project } from "./project";
 import { Task  } from "./task";
 import { Manager } from "./projectManager";
-import { addProjects } from "./dom"
 import { layout } from "./layout"
 import './styles.css';
 
@@ -9,10 +8,8 @@ let proj = new Project("shop", "carry out early morning", "tomorrow");
 let task = new Task("milk", "green", "ASAP");
 let task1 = new Task("cheese", "blue", "ASAP");
 
+// hide one task
 task.outstanding = false
-// allows edit of details
-// task.edit("id", 10)
-// task.edit("title", 10000)
 
 let proj2 = new Project("garden", "carry out early morning", "tomorrow")
 let task2 = new Task("mow", "grass", "ASAP")
@@ -27,13 +24,6 @@ proj.add(task1)
 proj2.add(task2)
 proj2.add(task12)
 
-// proj.list.forEach((item)=>console.log(item.title))
-// proj2.list.forEach((item)=>console.log(item.title))
-
-proj2.list.forEach((item)=>item.dueDate = "Complete")
-
-// console.log(proj2.oustanding())
-
 manager.add(proj)
 manager.add(proj2)
 
@@ -43,3 +33,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 export { manager }
+
+// proj.list.forEach((item)=>console.log(item.title))
+// proj2.list.forEach((item)=>console.log(item.title))
+
+// proj2.list.forEach((item)=>item.dueDate = "Complete")
+
+// console.log(proj2.oustanding())
+

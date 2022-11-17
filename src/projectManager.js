@@ -1,9 +1,9 @@
 export class Manager {
 
-    // create empty list for projects
+    // create empty list for projects or tasks
     list = []
 
-    // Add project to list
+    // Add project/tasks to list
     add(project){
         // set id of project bassed on how many projects exist
         project.id = this.list.length
