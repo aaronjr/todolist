@@ -78,16 +78,16 @@ export function editProjectForm (content, project) {
     // list of needed items
     const formElements = [
         // label and input for name
-        ['label', '', '', 'Title', '', 'TaskName', ''],
-        ['input', 'TaskName', 'addTaskDetails','', `${project.title}`, '', 'TaskName'],
+        ['label', '', '', 'Title', '', 'ProjectName', ''],
+        ['input', 'ProjectName', 'editTaskDetails','', `${project.title}`, '', 'ProjectName'],
         // label and input for description
-        ['label', '', '', 'Description', '', 'TaskDescription', ''],
-        ['input', 'TaskDescription', 'addTaskDetails','', `${project.description}`, '', 'TaskDescription'],
+        ['label', '', '', 'Description', '', 'ProjectDescription', ''],
+        ['input', 'ProjectDescription', 'editProjectDetails','', `${project.description}`, '', 'ProjectDescription'],
         // label and input for date
-        ['label', '', '', 'Due', '', 'TaskDue', ''],
-        ['input', 'TaskDue', 'addTaskDue','', `${project.dueDate}`, '', 'TaskDue'],
+        ['label', '', '', 'Due', '', 'ProjectDue', ''],
+        ['input', 'ProjectDue', 'editProjectDue','', `${project.dueDate}`, '', 'ProjectDue'],
         // button
-        ['button', '', 'addTaskButton','Confirm changes'],
+        ['button', '', 'editProjectButton','Confirm changes'],
     ]
 
     loopForm(formElements, form)
@@ -99,9 +99,9 @@ export function editProjectForm (content, project) {
         e.preventDefault()
 
         // get details from form
-        let newTitle = form.TaskName.value
-        let newDes = form.TaskDescription.value
-        let newDate = form.TaskDue.value
+        let newTitle = form.ProjectName.value
+        let newDes = form.ProjectDescription.value
+        let newDate = form.ProjectDue.value
 
         // get correct project
         const thisProject = manager.list[project.id]
@@ -116,6 +116,66 @@ export function editProjectForm (content, project) {
 
        // pass through each item and where to append
         addProjects(content, thisProject.checkOutstanding(), project.id)
+
+        // reload sidebar incase name was changed
+        loadSidebar(side, manager.checkOutstanding(), content)
+    })
+    projectDetailsDiv.append(form)
+}
+
+export function editTaskForm (content, project, id) {
+
+    // create a form
+    const form = createEle('form', 'editTaskForm', '')
+
+    // (tag,  name, className = "", inner = "", value = "" , forlabel = "", id="")    
+
+    // get correct project
+    const thisProject = manager.list[project]
+
+    const thisTask = thisProject.list[id]
+
+    // list of needed items
+    const formElements = [
+        // label and input for name
+        ['label', '', '', 'Title', '', 'TaskName', ''],
+        ['input', 'TaskName', 'addTaskDetails','', `${thisTask.title}`, '', 'TaskName'],
+        // label and input for description
+        ['label', '', '', 'Description', '', 'TaskDescription', ''],
+        ['input', 'TaskDescription', 'addTaskDetails','', `${thisTask.description}`, '', 'TaskDescription'],
+        // label and input for date
+        ['label', '', '', 'Due', '', 'TaskDue', ''],
+        ['input', 'TaskDue', 'addTaskDue','', `${thisTask.dueDate}`, '', 'TaskDue'],
+        // button
+        ['button', '', 'addTaskButton','Confirm changes'],
+    ]
+
+    loopForm(formElements, form)
+
+    let thisBox = document.getElementById(`#${id}`)
+    console.log(thisBox)
+
+    let projectDetailsDiv = document.querySelector('.projectDetailsDiv')
+
+    form.addEventListener('submit', (e) => {
+        // prevent submit
+        e.preventDefault()
+
+        // get details from form
+        let newTitle = form.TaskName.value
+        let newDes = form.TaskDescription.value
+        let newDate = form.TaskDue.value
+
+        // update details
+        thisTask.edit('title', newTitle)
+        thisTask.edit('description', newDes)
+        thisTask.edit('dueDate', newDate)
+
+        // get sidebar
+        const side = document.querySelector('.side')
+
+       // pass through each item and where to append
+        addProjects(content, thisProject.checkOutstanding(), project)
 
         // reload sidebar incase name was changed
         loadSidebar(side, manager.checkOutstanding(), content)

@@ -17,7 +17,8 @@ export function loop(array, where){
             createEle(
                 array[counter][0],
                 array[counter][1],
-                array[counter][2]))
+                array[counter][2],
+                array[counter][3]))
     }
 }
 

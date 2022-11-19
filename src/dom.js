@@ -1,6 +1,6 @@
 import { createEle, loop } from "./createElements"
 import { manager } from './index'
-import { addProjectForm, addTaskForm, editProjectForm } from "./forms"
+import { addProjectForm, addTaskForm, editProjectForm, editTaskForm } from "./forms"
 
 // add projects to content section, where is where to append
 export function addProjects(content, objs, projectId){
@@ -36,10 +36,10 @@ export function addProjects(content, objs, projectId){
         let list = createEle("ul", "task-list", obj.title)
 
         let listitems = [
-            ['li', 'list-item', `Description: ${obj.desciption}`],
-            ['li', 'list-item', `Due: ${obj.dueDate}`],
-            ['button', 'editTaskButton', 'Edit task'],
-            ['button', 'CompleteTaskButton', 'Complete']
+            ['li', 'list-item', `Description: ${obj.desciption}`,''],
+            ['li', 'list-item', `Due: ${obj.dueDate}`,''],
+            ['button', 'editTaskButton', 'Edit task', obj.id],
+            ['button', 'completeTaskButton', 'Complete', obj.id]
         ]
 
         // add ul to box element
@@ -50,6 +50,18 @@ export function addProjects(content, objs, projectId){
 
         // add divs to ".content"
         content.append(box)
+
+    })
+
+    const editTaskButtons = document.querySelectorAll('.editTaskButton')
+    editTaskButtons.forEach((editTaskButton) => {
+        editTaskButton.addEventListener('click', () => {
+            if(!(document.querySelector('.editTaskForm'))){
+                // load the correct todo list from the projects
+                editTaskButton.style.display = "none"
+                editTaskForm(content, projectId, editTaskButton.id)
+            }
+        })
     })
     
 
