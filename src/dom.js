@@ -137,6 +137,6 @@ export function loadSidebar(){
 // find the correct project
 export function getTasks(id){
     // get the project that needs to be loaded.
-    let thisProject = manager.list[id]
+    const thisProject = manager.list[id]
     return thisProject
 }
