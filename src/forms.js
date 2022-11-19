@@ -60,7 +60,7 @@ export function addTaskForm(content, projectId){
         thisProject.add(task)
 
         // pass through object
-        addProjects(thisProject.checkOutstanding(), projectId)
+        addProjects(getTasks(projectId), projectId)
     })
 
     // add to correct location
@@ -179,13 +179,16 @@ export function completeTask (project, id) {
     // get correct project
     const thisProject = getTasks(project)
     const thisTask = thisProject.list[id]
+    console.log(thisTask, thisProject)
 
     // update task to complete
     thisTask.edit('outstanding', false)
+
+    console.log(thisTask)
 
     // load sidebar
     loadSidebar()
 
     // reload content
-    addProjects(thisProject.checkOutstanding(), project)
+    addProjects(getTasks(project), project)
 }

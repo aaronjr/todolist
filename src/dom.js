@@ -35,7 +35,7 @@ export function addProjects(objs, projectId){
     })
     
     // loop through list of tasks
-    objs.list.forEach( (obj) => {
+    objs.checkOutstanding().forEach( (obj) => {
 
         // create a "box" for each task
         let box = createEle("div", "box", "", obj.id)
