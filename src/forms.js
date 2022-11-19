@@ -25,7 +25,7 @@ export function addProjectForm(where, content){
         let dueDate = "Now bitch"
         const project = new Project(projectName, description, dueDate)
         manager.add(project)
-        loadSidebar(where, manager.checkOutstanding(), content)
+        loadSidebar(manager.checkOutstanding())
     })
 
     // add to correct location
@@ -61,7 +61,7 @@ export function addTaskForm(content, projectId){
         thisProject.add(task)
 
         // pass through object
-        addProjects(content, thisProject.checkOutstanding(), projectId)
+        addProjects(thisProject.checkOutstanding(), projectId)
     })
 
     // add to correct location
@@ -115,26 +115,24 @@ export function editProjectForm (content, project) {
         const side = document.querySelector('.side')
 
        // pass through each item and where to append
-        addProjects(content, thisProject.checkOutstanding(), project.id)
+        addProjects(thisProject.checkOutstanding(), project.id)
 
         // reload sidebar incase name was changed
-        loadSidebar(side, manager.checkOutstanding(), content)
+        loadSidebar(manager.checkOutstanding())
     })
     projectDetailsDiv.append(form)
 }
 
-export function editTaskForm (content, project, id) {
+export function editTaskForm (thisDiv, project, id) {
 
     // create a form
     const form = createEle('form', 'editTaskForm', '')
-
-    // (tag,  name, className = "", inner = "", value = "" , forlabel = "", id="")    
 
     // get correct project
     const thisProject = manager.list[project]
 
     const thisTask = thisProject.list[id]
-
+    console.log(thisTask)
     // list of needed items
     const formElements = [
         // label and input for name
@@ -155,8 +153,6 @@ export function editTaskForm (content, project, id) {
     let thisBox = document.getElementById(`#${id}`)
     console.log(thisBox)
 
-    let projectDetailsDiv = document.querySelector('.projectDetailsDiv')
-
     form.addEventListener('submit', (e) => {
         // prevent submit
         e.preventDefault()
@@ -175,10 +171,17 @@ export function editTaskForm (content, project, id) {
         const side = document.querySelector('.side')
 
        // pass through each item and where to append
-        addProjects(content, thisProject.checkOutstanding(), project)
+        addProjects(thisProject.checkOutstanding(), project)
 
         // reload sidebar incase name was changed
-        loadSidebar(side, manager.checkOutstanding(), content)
+        loadSidebar(manager.checkOutstanding())
     })
-    projectDetailsDiv.append(form)
+    
+    console.log(thisDiv)
+    thisDiv.append(form)
+}
+
+export function editTaskForm (project, id) {
+
+
 }

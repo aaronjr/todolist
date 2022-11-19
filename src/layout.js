@@ -16,12 +16,10 @@ export function layout(){
 
     // get back these items
     const nav = document.querySelector('.nav')
-    const side = document.querySelector('.side')
-    const content = document.querySelector('.content')
-
+    
     // add title to page
     nav.append(createEle('h1', 'title', 'Project manager inc.'))
 
     // load sidebar pass all available objects
-    loadSidebar(side, manager.checkOutstanding(), content)
+    loadSidebar(manager.checkOutstanding())
 }

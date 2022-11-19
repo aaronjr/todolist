@@ -1,15 +1,17 @@
-import { createEle, loop } from "./createElements"
+import { createEle, loop, clear } from "./createElements"
 import { manager } from './index'
 import { addProjectForm, addTaskForm, editProjectForm, editTaskForm } from "./forms"
 
 // add projects to content section, where is where to append
-export function addProjects(content, objs, projectId){
+export function addProjects(objs, projectId){
+
+    // get content
+    const content = document.querySelector('.content')
 
     // empty content box
-    while(content.firstChild){
-        content.removeChild(content.lastChild)
-    }
+    clear(content)
 
+    // box to hold project info
     const projectDetailsDiv = createEle('div', 'projectDetailsDiv', '')
 
     // add project name to page
@@ -19,6 +21,7 @@ export function addProjects(content, objs, projectId){
         ['p', 'projectDueDate', `${manager.list[projectId].dueDate}`],
         ['button', 'editProject', 'Edit project']
     ]
+
     loop(projectDetails, projectDetailsDiv)
     content.append(projectDetailsDiv)
 
@@ -30,38 +33,38 @@ export function addProjects(content, objs, projectId){
     
     
     objs.forEach( (obj) => {
-        // console.log(obj.id)
+
         // create a "box" for each task
         let box = createEle("div", "box", "", obj.id)
-        let list = createEle("ul", "task-list", obj.title)
+        let list = createEle("ul", `${obj.id}task-list task-list`, obj.title)
 
         let listitems = [
-            ['li', 'list-item', `Description: ${obj.desciption}`,''],
+            ['li', 'list-item', `Description: ${obj.description}`,''],
             ['li', 'list-item', `Due: ${obj.dueDate}`,''],
-            ['button', 'editTaskButton', 'Edit task', obj.id],
-            ['button', 'completeTaskButton', 'Complete', obj.id]
         ]
+
+        let edit = createEle('button', 'editTaskButton', 'Edit task', obj.id)
+        let complete = createEle('button', 'editCompleteButton', 'complete task', obj.id)
+        
+        edit.addEventListener('click', () => {
+            if(!(document.querySelector('.editTaskForm'))){
+                // load the correct todo list from the projects
+                clear(box)
+                editTaskForm(box, projectId, edit.id)
+            }
+        })
 
         // add ul to box element
         box.append(list)
 
         // add to body and box div
-        loop(listitems, box)
+        loop(listitems, list)
+        list.append(edit)
+        list.append(complete)
 
         // add divs to ".content"
         content.append(box)
 
-    })
-
-    const editTaskButtons = document.querySelectorAll('.editTaskButton')
-    editTaskButtons.forEach((editTaskButton) => {
-        editTaskButton.addEventListener('click', () => {
-            if(!(document.querySelector('.editTaskForm'))){
-                // load the correct todo list from the projects
-                editTaskButton.style.display = "none"
-                editTaskForm(content, projectId, editTaskButton.id)
-            }
-        })
     })
     
 
@@ -76,12 +79,14 @@ export function addProjects(content, objs, projectId){
     content.append(addTask)
 }
 
-export function loadSidebar(side, objs, content){
+export function loadSidebar(objs){
+
+    // get content and side
+    const side = document.querySelector('.side')
+    const content = document.querySelector('.content')
 
     // remove each child to avoid duplication from content box
-    while(side.firstChild){
-        side.removeChild(side.lastChild)
-    }
+    clear(side)
 
     // create a Node list
     let list = createEle("ul", "list", "Projects")
@@ -104,6 +109,7 @@ export function loadSidebar(side, objs, content){
             addProjectForm(side, content)
         }
     })
+
     side.append(addProjectButton)
 
     // get back items and add event listeners
@@ -113,22 +119,19 @@ export function loadSidebar(side, objs, content){
         item.addEventListener('click', () => {
             // pass the id number and the node of where
             // the content should be loaded ".content"
-            getTasks(content, item.getAttribute("id"))
+            getTasks(item.getAttribute("id"))
         })
     })
 }
 
 // find the correct project
-export function getTasks(where, id){
+export function getTasks(id){
 
-    // remove each child to avoid duplication from content box
-    while(where.firstChild){
-        where.removeChild(where.lastChild)
-    }
+    clear(document.querySelector('.content'))
 
     // get the project that needs to be loaded.
     let thisProject = manager.list[id]
 
     // pass through each item and where to append
-    addProjects(where, thisProject.checkOutstanding(), id)
+    addProjects(thisProject.checkOutstanding(), id)
 }

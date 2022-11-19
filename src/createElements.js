@@ -52,3 +52,10 @@ export function loopForm(array, where){
                 ))
     }
 }
+
+export function clear(where){
+    // remove each child to avoid duplication from content box
+    while(where.firstChild){
+        where.removeChild(where.lastChild)
+    }
+}
