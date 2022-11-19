@@ -3,7 +3,10 @@ import { manager } from './index'
 import { addProjectForm, addTaskForm, editProjectForm, editTaskForm, completeTask } from "./forms"
 
 // add projects to content section, list of objects and parent id
-export function addProjects(objs, projectId){
+export function addProjects(projectId){
+
+    // get tasks for project
+    const objs = getTasks(projectId)
 
     // get content
     const content = document.querySelector('.content')
@@ -129,7 +132,7 @@ export function loadSidebar(){
         item.addEventListener('click', () => {
             // pass the id number and the node of where
             // the content should be loaded ".content"
-            addProjects(getTasks(item.getAttribute("id")), item.getAttribute("id"))
+            addProjects(item.getAttribute("id"))
         })
     })
 }

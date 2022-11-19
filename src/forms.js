@@ -60,7 +60,7 @@ export function addTaskForm(content, projectId){
         thisProject.add(task)
 
         // pass through object
-        addProjects(getTasks(projectId), projectId)
+        addProjects(projectId)
     })
 
     // add to correct location
@@ -112,7 +112,7 @@ export function editProjectForm (project) {
         thisProject.edit('dueDate', newDate)
 
        // pass through each item and where to append
-        addProjects(thisProject.checkOutstanding(), project.id)
+        addProjects(project.id)
 
         // reload sidebar incase name was changed
         loadSidebar()
@@ -161,9 +161,8 @@ export function editTaskForm (thisDiv, project, id) {
         thisTask.edit('description', newDes)
         thisTask.edit('dueDate', newDate)
 
-        
        // pass through each item and where to append
-        addProjects(getTasks(project), project)
+        addProjects(project)
 
         // reload sidebar incase name was changed
         loadSidebar()
@@ -179,16 +178,10 @@ export function completeTask (project, id) {
     // get correct project
     const thisProject = getTasks(project)
     const thisTask = thisProject.list[id]
-    console.log(thisTask, thisProject)
 
     // update task to complete
     thisTask.edit('outstanding', false)
 
-    console.log(thisTask)
-
-    // load sidebar
-    loadSidebar()
-
     // reload content
-    addProjects(getTasks(project), project)
+    addProjects(project)
 }
