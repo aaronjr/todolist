@@ -21,5 +21,5 @@ export function layout(){
     nav.append(createEle('h1', 'title', 'Project manager inc.'))
 
     // load sidebar pass all available objects
-    loadSidebar(manager.checkOutstanding())
+    loadSidebar()
 }

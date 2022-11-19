@@ -1,10 +1,10 @@
 import { createEle, loopForm } from "./createElements"
-import { loadSidebar, addProjects } from "./dom"
+import { loadSidebar, addProjects, getTasks } from "./dom"
 import { manager } from "./index"
 import { Project } from './project'
 import { Task } from "./task"
 
-export function addProjectForm(where, content){
+export function addProjectForm(side){
     const form = createEle('form', 'addProjectForm', '')
     // list of needed items
     const formElements = [
@@ -22,14 +22,14 @@ export function addProjectForm(where, content){
         e.preventDefault()
         let projectName = form.projectName.value
         let description = "new entry"
-        let dueDate = "Now bitch"
+        let dueDate = "Now"
         const project = new Project(projectName, description, dueDate)
         manager.add(project)
-        loadSidebar(manager.checkOutstanding())
+        loadSidebar()
     })
 
     // add to correct location
-    where.append(form)
+    side.append(form)
 }
 
 export function addTaskForm(content, projectId){
@@ -44,7 +44,6 @@ export function addTaskForm(content, projectId){
 
     // add items to form
     loopForm(formElements, form)
-
     
     form.addEventListener('submit', (e) =>{
         // stop form submitting
@@ -52,12 +51,12 @@ export function addTaskForm(content, projectId){
 
         // get values from form
         let taskName = form.TaskName.value
-        let description = "new entry"
-        let dueDate = "Now bitch"
+        let description = "new"
+        let dueDate = "?"
         const task = new Task(taskName, description, dueDate)
 
         // Get this project and add task to it
-        const thisProject = manager.list[projectId]
+        const thisProject = getTasks(projectId)
         thisProject.add(task)
 
         // pass through object
@@ -68,7 +67,8 @@ export function addTaskForm(content, projectId){
     content.append(form)
 }
 
-export function editProjectForm (content, project) {
+// takes in project object
+export function editProjectForm (project) {
 
     // create a form
     const form = createEle('form', 'editProjectForm', '')
@@ -104,35 +104,32 @@ export function editProjectForm (content, project) {
         let newDate = form.ProjectDue.value
 
         // get correct project
-        const thisProject = manager.list[project.id]
+        const thisProject = getTasks(project.id)
 
         // update details
         thisProject.edit('title', newTitle)
         thisProject.edit('description', newDes)
         thisProject.edit('dueDate', newDate)
 
-        // get sidebar
-        const side = document.querySelector('.side')
-
        // pass through each item and where to append
         addProjects(thisProject.checkOutstanding(), project.id)
 
         // reload sidebar incase name was changed
-        loadSidebar(manager.checkOutstanding())
+        loadSidebar()
     })
     projectDetailsDiv.append(form)
 }
 
+// takes in the div the form should append to and the project and task id
 export function editTaskForm (thisDiv, project, id) {
 
     // create a form
     const form = createEle('form', 'editTaskForm', '')
 
     // get correct project
-    const thisProject = manager.list[project]
-
+    const thisProject = getTasks(project)
     const thisTask = thisProject.list[id]
-    console.log(thisTask)
+
     // list of needed items
     const formElements = [
         // label and input for name
@@ -147,11 +144,8 @@ export function editTaskForm (thisDiv, project, id) {
         // button
         ['button', '', 'addTaskButton','Confirm changes'],
     ]
-
+    // add elements to form
     loopForm(formElements, form)
-
-    let thisBox = document.getElementById(`#${id}`)
-    console.log(thisBox)
 
     form.addEventListener('submit', (e) => {
         // prevent submit
@@ -167,21 +161,31 @@ export function editTaskForm (thisDiv, project, id) {
         thisTask.edit('description', newDes)
         thisTask.edit('dueDate', newDate)
 
-        // get sidebar
-        const side = document.querySelector('.side')
-
+        
        // pass through each item and where to append
-        addProjects(thisProject.checkOutstanding(), project)
+        addProjects(getTasks(project), project)
 
         // reload sidebar incase name was changed
-        loadSidebar(manager.checkOutstanding())
+        loadSidebar()
     })
-    
-    console.log(thisDiv)
+
+    // add to correct box
     thisDiv.append(form)
 }
 
-export function editTaskForm (project, id) {
+// takes in project id and task id - not as an object but a string
+export function completeTask (project, id) {
 
+    // get correct project
+    const thisProject = getTasks(project)
+    const thisTask = thisProject.list[id]
 
+    // update task to complete
+    thisTask.edit('outstanding', false)
+
+    // load sidebar
+    loadSidebar()
+
+    // reload content
+    addProjects(thisProject.checkOutstanding(), project)
 }
