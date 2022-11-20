@@ -1,5 +1,6 @@
+import { manager } from "."
 import { createEle, loop} from "./createElements"
-import { loadSidebar } from "./dom"
+import { addProjects, loadSidebar } from "./dom"
 
 const body = document.querySelector('body')
 
@@ -17,5 +18,8 @@ export function layout(){
     document.querySelector('.nav').append(createEle('h1', 'title', 'Project manager.'))
 
     // load sidebar pass all available objects
+    if (manager.list) {
+        addProjects(0)
+    }
     loadSidebar()
 }
