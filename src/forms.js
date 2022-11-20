@@ -21,8 +21,8 @@ export function addProjectForm(side){
     form.addEventListener('submit', (e) =>{
         e.preventDefault()
         let projectName = form.projectName.value
-        let description = "new entry"
-        let dueDate = "Now"
+        let description = ""
+        let dueDate = ""
         const project = new Project(projectName, description, dueDate)
         manager.add(project)
         loadSidebar()
@@ -42,6 +42,8 @@ export function addTaskForm(content, projectId){
         ['button', '', 'addTaskButton','Add'],
     ]
 
+    
+
     // add items to form
     loopForm(formElements, form)
     
@@ -51,8 +53,8 @@ export function addTaskForm(content, projectId){
 
         // get values from form
         let taskName = form.TaskName.value
-        let description = "new"
-        let dueDate = "?"
+        let description = ""
+        let dueDate = ""
         const task = new Task(taskName, description, dueDate)
 
         // Get this project and add task to it
@@ -62,9 +64,10 @@ export function addTaskForm(content, projectId){
         // pass through object
         addProjects(projectId)
     })
-
+    
     // add to correct location
     content.append(form)
+    document.querySelector('.addTaskDetails').placeholder = "Task title"
 }
 
 // takes in project object
@@ -133,13 +136,13 @@ export function editTaskForm (thisDiv, project, id) {
     // list of needed items
     const formElements = [
         // label and input for name
-        ['label', '', '', 'Title', '', 'TaskName', ''],
+        ['label', '', '', 'Title:', '', 'TaskName', ''],
         ['input', 'TaskName', 'addTaskDetails','', `${thisTask.title}`, '', 'TaskName'],
         // label and input for description
-        ['label', '', '', 'Description', '', 'TaskDescription', ''],
+        ['label', '', '', 'Description:', '', 'TaskDescription', ''],
         ['input', 'TaskDescription', 'addTaskDetails','', `${thisTask.description}`, '', 'TaskDescription'],
         // label and input for date
-        ['label', '', '', 'Due', '', 'TaskDue', ''],
+        ['label', '', '', 'Due:', '', 'TaskDue', ''],
         ['input', 'TaskDue', 'addTaskDue','', `${thisTask.dueDate}`, '', 'TaskDue'],
         // button
         ['button', '', 'addTaskButton','Confirm changes'],
@@ -161,7 +164,7 @@ export function editTaskForm (thisDiv, project, id) {
         thisTask.edit('description', newDes)
         thisTask.edit('dueDate', newDate)
 
-       // pass through each item and where to append
+       // add tasks to page
         addProjects(project)
 
         // reload sidebar incase name was changed

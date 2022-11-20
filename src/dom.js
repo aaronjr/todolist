@@ -21,8 +21,8 @@ export function addProjects(projectId){
     // add project name to page
     const projectDetails = [
         ['h1', 'projectTitle', `${tasks.title}`],
-        ['p', 'projectDescription', `${tasks.description}`],
-        ['p', 'projectDueDate', `${tasks.dueDate}`],
+        ['p', 'projectDueDate', `Due: ${tasks.dueDate}`],
+        ['p', 'projectDescription', `Description: ${tasks.description}`],
         ['button', 'editProject', 'Edit project']
     ]
 
@@ -42,16 +42,17 @@ export function addProjects(projectId){
 
         // create a "box" for each task
         let box = createEle("div", "box", "", obj.id)
-        let list = createEle("ul", `${obj.id}task-list task-list`, obj.title)
+        let list = createEle("ul", `task-list`,'')
 
         let listitems = [
+            ['li', `list-item`, `${obj.title}`],
             ['li', 'list-item', `Description: ${obj.description}`,''],
             ['li', 'list-item', `Due: ${obj.dueDate}`,''],
         ]
 
         // buttons
         let edit = createEle('button', 'editTaskButton', 'Edit task', obj.id)
-        let complete = createEle('button', 'editCompleteButton', 'complete task', obj.id)
+        let complete = createEle('button', 'editCompleteButton', 'Complete task', obj.id)
         
         edit.addEventListener('click', () => {
             if(!(document.querySelector('.editTaskForm'))){
@@ -76,7 +77,6 @@ export function addProjects(projectId){
 
         // add divs to ".content"
         content.append(box)
-
     })
 
     // add task button
@@ -103,8 +103,8 @@ export function loadSidebar(){
     clear(side)
 
     // create a Node list
-    let list = createEle("ul", "list", "Projects")
-
+    let list = createEle("ul", "list", "")
+    list.append(createEle('li', 'list-title', "Projects"))
     // pass over each item and add its title to the sidebar list
     objs.forEach( (project) => {
         list.append(createEle('li', 'project-item', `${project.title}`, `${project.id}`))
@@ -139,7 +139,5 @@ export function loadSidebar(){
 
 // find the correct project
 export function getTasks(id){
-    // get the project that needs to be loaded.
-    const thisProject = manager.list[id]
-    return thisProject
+    return manager.list[id]
 }
