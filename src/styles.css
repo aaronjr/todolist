@@ -17,7 +17,9 @@ button,
 input{
     border-radius: 1rem;
     border: solid 1px black;
-
+    min-height: min-content;
+    min-width: min-content;
+    overflow: none;
 }
 button:hover{
     filter: brightness(110%);
@@ -111,7 +113,7 @@ body{
     border-radius: 1rem;
     margin: 10px 0px;
     background-color: rgb(255, 252, 252);
-    height: 50px;
+    min-width: min-content;
 }
 .box:hover{
     filter: brightness(105%);
@@ -160,6 +162,7 @@ body{
     padding-left: 10px;
     margin: 10px;
     flex-grow: 1;
+    padding: 5px
 }
 
 .editTaskForm button{
@@ -170,7 +173,9 @@ body{
 }
 
 .editCompleteButton{
-    background-color: var(--red)
+    background-color: var(--red);
+    margin: 10px;
+    
 }
 
 .addTask{
@@ -185,7 +190,7 @@ body{
 }
 
 .editProject{
-    padding:0px 7px;
+    padding:0px 14px;
     background-color: var(--blue);
     margin: 10px 0px;
 }
