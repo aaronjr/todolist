@@ -1,4 +1,4 @@
-import { createEle, loopForm } from "./createElements"
+import { createEle, loopForm, clear } from "./createElements"
 import { loadSidebar, addProjects, getTasks } from "./dom"
 import { manager } from "./index"
 import { Project } from './project'
@@ -26,10 +26,12 @@ export function addProjectForm(side){
         const project = new Project(projectName, description, dueDate)
         manager.add(project)
         loadSidebar()
+        addProjects(manager.list.length - 1)
     })
-
+    
     // add to correct location
     side.append(form)
+    document.querySelector('.addProjectDetails').placeholder = "Project title"
 }
 
 export function addTaskForm(content, projectId){
@@ -41,8 +43,6 @@ export function addTaskForm(content, projectId){
         ['input', 'TaskName', 'addTaskDetails',''],
         ['button', '', 'addTaskButton','Add'],
     ]
-
-    
 
     // add items to form
     loopForm(formElements, form)
@@ -185,6 +185,19 @@ export function completeTask (project, id) {
     // update task to complete
     thisTask.edit('outstanding', false)
 
-    // reload content
-    addProjects(project)
+    if(thisProject.checkOutstanding().length == 0){
+        manager.list[project].edit('outstanding', false)
+
+        const content = document.querySelector('.content')
+        clear(content)
+        console.log("here")
+        loadSidebar()
+        if(manager.list >= 0){
+            addProjects(0)
+        }
+    }
+    else{
+        // reload content
+        addProjects(project)
+    }
 }

@@ -89,6 +89,29 @@ export function addProjects(projectId){
     })
     // add button to page
     content.append(addTask)
+
+    // loop through list of tasks
+    objs.checkComplete().forEach( (obj) => {
+
+        // create a "box" for each task
+        let box = createEle("div", "complete-box", "", '')
+        let list = createEle("ul", `complete-list`,'')
+
+        let listitems = [
+            ['li', `list-item`, `${obj.title}`],
+            ['li', 'list-item', `Description: ${obj.description}`,''],
+            ['li', 'list-item', `Due: ${obj.dueDate}`,''],
+        ]
+
+        // add ul to box element
+        box.append(list)
+
+        // add to body and box div
+        loop(listitems, list)
+        
+        // add divs to ".content"
+        content.append(box)
+    })
 }
 
 export function loadSidebar(){
