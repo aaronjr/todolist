@@ -93,7 +93,7 @@ export function addProjects(projectId){
     let addTask = createEle('button', 'addTask', 'Add task')
     addTask.addEventListener('click', () => {
         if(!(document.querySelector('.addTaskForm'))){
-            addTaskForm(content, projectId)
+            addTaskForm(projectId)
             addTask.style.display = 'none'
         }
     })

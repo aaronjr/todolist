@@ -16,10 +16,10 @@
 button,
 input{
     border-radius: 1rem;
-    border: solid 1px black;
+    box-shadow: 0px 3px 10px rgb(216, 213, 213);
     min-height: min-content;
     min-width: min-content;
-    overflow: none;
+    border: none;
 }
 button:hover{
     filter: brightness(110%);
@@ -44,6 +44,7 @@ body{
 
 .side{
     background-color: rgb(219, 217, 217);
+    box-shadow: 0px 3px 10px rgb(169, 168, 168);
     display: flex;
     align-items: center;
     flex-direction: column;
@@ -120,7 +121,7 @@ body{
     display: grid;
     align-items: center;
     justify-content: stretch;
-    border: solid black 1px;
+    box-shadow: 0px 3px 10px rgb(169, 168, 168);
     border-radius: 1rem;
     margin: 10px 0px;
     background-color: rgb(255, 252, 252);
@@ -170,15 +171,13 @@ body{
 
 .editTaskForm input,
 .editProjectForm input{
-    padding-left: 10px;
     margin: 10px;
     flex-grow: 1;
-    padding: 5px
+    padding-left: 15px;
 }
 
 .editTaskForm button{
     margin-right: 10px;
-    height: 35px;
     padding: 0px 8px;
     background-color: var(--green);
 }
@@ -193,7 +192,8 @@ body{
    width: 30%;
    align-self: center;
    height: 50px;
-   background-color: var(--green)
+   background-color: var(--green);
+   margin-top: 10px;
 }
 
 .editTaskButton{
@@ -233,7 +233,7 @@ body{
     display: grid;
     align-items: center;
     justify-content: stretch;
-    border: solid black 1px;
+    box-shadow: 0px 3px 10px rgb(169, 168, 168);
     border-radius: 1rem;
     margin: 10px 0px;
     background-color: rgb(255, 209, 209);
@@ -263,4 +263,8 @@ body{
     background-color: var(--red);
     padding: 0px 7px;
     margin-left: 10px;
+}
+
+.projectDetailsDiv{
+    width: minmax(50%, 300px);
 }

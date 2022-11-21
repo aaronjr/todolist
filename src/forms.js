@@ -16,7 +16,7 @@ export function addProjectForm(side){
 
     // add items to form
     loopForm(formElements, form)
-
+   
     // stop form submitting
     form.addEventListener('submit', (e) =>{
         e.preventDefault()
@@ -31,10 +31,13 @@ export function addProjectForm(side){
     
     // add to correct location
     side.append(form)
+
+    // update certain items of form
     document.querySelector('.addProjectDetails').placeholder = "Project title"
+    document.querySelector('.addProjectDetails').required = true
 }
 
-export function addTaskForm(content, projectId){
+export function addTaskForm(projectId){
     // create a form
     const form = createEle('form', 'addTaskForm', '')
 
@@ -68,6 +71,7 @@ export function addTaskForm(content, projectId){
     // add to correct location
     document.querySelector('.addTaskDiv').append(form)
     document.querySelector('.addTaskDetails').placeholder = "Task title"
+    document.querySelector('.addTaskDetails').required = true
 }
 
 // takes in project object
@@ -121,6 +125,7 @@ export function editProjectForm (project) {
         loadSidebar()
     })
     projectDetailsDiv.append(form)
+    document.querySelector('.editTaskDetails').required = true
 }
 
 // takes in the div the form should append to and the project and task id
@@ -173,6 +178,7 @@ export function editTaskForm (thisDiv, project, id) {
 
     // add to correct box
     thisDiv.append(form)
+    document.querySelector('.addTaskDetails').required = true
 }
 
 // takes in project id and task id - not as an object but a string
