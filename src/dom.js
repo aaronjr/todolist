@@ -1,6 +1,6 @@
 import { createEle, loop, clear } from "./createElements"
 import { manager } from './index'
-import { addProjectForm, addTaskForm, editProjectForm, editTaskForm, completeTask } from "./forms"
+import { addProjectForm, addTaskForm, editProjectForm, editTaskForm, completeTask, completeProject } from "./forms"
 
 // add projects to content section, list of objects and parent id
 export function addProjects(projectId){
@@ -23,7 +23,8 @@ export function addProjects(projectId){
         ['h1', 'projectTitle', `${tasks.title}`],
         ['p', 'projectDueDate', `Due: ${tasks.dueDate}`],
         ['p', 'projectDescription', `Description: ${tasks.description}`],
-        ['button', 'editProject', 'Edit project']
+        ['button', 'editProject', 'Edit project'],
+        ['button', 'completeProject', 'Complete project'],
     ]
 
     // add details to div add div to content
@@ -31,10 +32,18 @@ export function addProjects(projectId){
     content.append(projectDetailsDiv)
 
     // button to edit this projects details
+    const compProject = document.querySelector('.completeProject')
     const editProject = document.querySelector('.editProject')
     editProject.addEventListener('click', () => {
         editProjectForm(manager.list[projectId])
         editProject.style.display = 'none'
+        compProject.style.display = 'none'
+    })
+
+    // button to edit this projects details
+   
+    compProject.addEventListener('click', () => {
+        completeProject(projectId)
     })
     
     // loop through list of tasks
@@ -79,6 +88,7 @@ export function addProjects(projectId){
         content.append(box)
     })
 
+    const addTaskDiv = createEle('div', 'addTaskDiv', '')
     // add task button
     let addTask = createEle('button', 'addTask', 'Add task')
     addTask.addEventListener('click', () => {
@@ -88,8 +98,14 @@ export function addProjects(projectId){
         }
     })
     // add button to page
-    content.append(addTask)
+    addTaskDiv.append(addTask)
+    content.append(addTaskDiv)
 
+    if(objs.checkComplete().length > 0){
+        content.append(createEle('div','completeTitleDiv', ''))
+        document.querySelector('.completeTitleDiv').append(createEle('h3', 'completeTitle','Completed tasks'))
+    }
+   
     // loop through list of tasks
     objs.checkComplete().forEach( (obj) => {
 

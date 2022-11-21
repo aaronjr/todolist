@@ -66,7 +66,7 @@ export function addTaskForm(content, projectId){
     })
     
     // add to correct location
-    content.append(form)
+    document.querySelector('.addTaskDiv').append(form)
     document.querySelector('.addTaskDetails').placeholder = "Task title"
 }
 
@@ -185,19 +185,21 @@ export function completeTask (project, id) {
     // update task to complete
     thisTask.edit('outstanding', false)
 
-    if(thisProject.checkOutstanding().length == 0){
-        manager.list[project].edit('outstanding', false)
+    addProjects(project)
+}
 
-        const content = document.querySelector('.content')
-        clear(content)
-        console.log("here")
-        loadSidebar()
-        if(manager.list >= 0){
-            addProjects(0)
-        }
-    }
-    else{
-        // reload content
-        addProjects(project)
+export function completeProject(projectId){
+    
+    // const thisProject = getTasks(projectId)
+
+    manager.list[projectId].edit('outstanding', false)
+
+    const content = document.querySelector('.content')
+    clear(content)
+    loadSidebar()
+
+    let outstanding = manager.checkOutstanding()
+    if(outstanding.length > 0){
+        addProjects(outstanding[0].id)
     }
 }

@@ -190,7 +190,7 @@ body{
 }
 
 .addTask{
-   width: 70%;
+   width: 30%;
    align-self: center;
    height: 50px;
    background-color: var(--green)
@@ -248,4 +248,19 @@ body{
     grid-template-columns: repeat(3, 1fr);
     font-size: x-large;
     justify-self: center;
+}
+
+.addTaskDiv{
+    display: grid;
+    place-items: center;
+}
+
+.completeTitleDiv{
+    margin-top: 10px ;
+}
+
+.completeProject{
+    background-color: var(--red);
+    padding: 0px 7px;
+    margin-left: 10px;
 }
