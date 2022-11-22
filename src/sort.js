@@ -1,10 +1,10 @@
 import { manager } from ".";
-import { isWithinInterval, addDays, parseISO, format } from 'date-fns'
-import { clear } from "./createElements";
-import { loadSidebar } from "./dom";
+import { isWithinInterval, addDays, parseISO, format, startOfToday } from 'date-fns'
+import { clear, createEle, loop } from "./createElements";
+import { addProjects, loadSidebar } from "./dom";
+import { da } from "date-fns/locale";
 
 export function inDiary(period){
-    clear(document.querySelector('.content'))
     let list = []
     // loop through outstadning projects
     manager.checkOutstanding().forEach( (project) =>{
@@ -12,10 +12,10 @@ export function inDiary(period){
         project.checkOutstanding().forEach( (task) =>{
             
             // make a date from this expiry, today and last day needed
-            const thisDate = format(parseISO(task.dueDate), 'dd/MM/yyyy')
-            const today = format(new Date(1), 'dd/MM/yyyy')
-            const lastDay = format(addDays(new Date(1), period),'dd/MM/yyyy')
-            
+            const thisDate = parseISO(task.dueDate)
+            const today = startOfToday()
+            const lastDay = addDays(startOfToday(), period)
+
             // check if within range
             if ( isWithinInterval(thisDate,{ start: today, end: lastDay}) ){
                 // add objects to a list with project and task id
@@ -24,18 +24,53 @@ export function inDiary(period){
                     'task': task.id
                 })
             }
-            
         })
     })
-    getDiaryItems(list)
+    getDiaryItems(list, period)
 }
 
 // takes list of objects
-export function getDiaryItems(list){
-    
+export function getDiaryItems(list, period){
+    clear(document.querySelector('.content'))
+    // add to page
+    if(period == 8){
+        document.querySelector('.content').append(createEle('h1', 'projectTitle', 'Tasks due this week'))
+    }
+    else{
+        document.querySelector('.content').append(createEle('h1', 'projectTitle', 'Tasks due today'))
+    }
+
+    // through each item of the list and get details of relevant tasks.
     list.forEach((item) =>{
+
         let task = manager.list[`${item.project}`].list[`${item.task}`]
-        console.log(task.title, task.description, task.dueDate)
+        // console.log(task.title, task.description, task.dueDate)
+         
+        // create a "box" for each task
+        let box = createEle("div", "box diaryBox", "", task.id)
+        let list = createEle("ul", `task-list diary-list`,'')
+
+        // to add to list of each box
+        let listitems = [
+            ['li', `list-item`, `${task.title}`],
+            ['li', 'list-item', `Description: ${task.description}`,''],
+            ['li', 'list-item', `Due: ${task.dueDate}`,''],
+        ]
+
+        // button to view main project
+        const button = createEle('button', 'viewProject', 'View project')
+        button.addEventListener('click', () => {
+            addProjects(item.project)
+        })
+
+        // add ul to box element
+        box.append(list)
+        
+        // add to body and box div
+        loop(listitems, list)
+        list.append(button)
+
+        document.querySelector('.content').append(box)
     })
 
 }

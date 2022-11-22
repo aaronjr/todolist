@@ -8,9 +8,12 @@ import './styles.css';
 const newD = addDays(new Date(), 5)
 const date = format(newD, 'yyyy-MM-dd')
 
+const OD = addDays(new Date(), 0)
+const datez = format(OD, 'yyyy-MM-dd')
+
 let proj = new Project("Shop", "Shop in ASDA", `${date}`);
-let task = new Task("Milk", "Green", `${date}`);
-let task1 = new Task("Cheese", "Blue",`${date}`);
+let task = new Task("Milk", "Green", `${datez}`);
+let task1 = new Task("Cheese", "Blue",`${datez}`);
 
 // hide one task
 task.outstanding = false
