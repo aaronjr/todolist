@@ -97,7 +97,7 @@ export function editProjectForm (project) {
     ]
 
     loopForm(formElements, form)
-
+    // create a container
     let projectDetailsDiv = document.querySelector('.projectDetailsDiv')
 
     form.addEventListener('submit', (e) => {
@@ -124,6 +124,7 @@ export function editProjectForm (project) {
         loadSidebar()
     })
     projectDetailsDiv.append(form)
+    // make title required
     document.querySelector('.editTaskDetails').required = true
 }
 

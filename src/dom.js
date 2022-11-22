@@ -1,10 +1,11 @@
 import { createEle, loop, clear } from "./createElements"
+import { inWeek } from "./sort"
 import { manager } from './index'
 import { addProjectForm, addTaskForm, editProjectForm, editTaskForm, completeTask, completeProject } from "./forms"
 
 // add projects to content section, list of objects and parent id
 export function addProjects(projectId){
-
+    inWeek()
     // get tasks for project
     const objs = getTasks(projectId)
 

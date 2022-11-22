@@ -1,4 +1,4 @@
-import { format, parseISO } from 'date-fns'
+import { format } from 'date-fns'
 
 // create element with html tag, class and textContents
 export function createEle(tag, className = "", text = "", id = null){
@@ -27,21 +27,24 @@ export function loop(array, where){
 // create element with html tag, class and textContents
 export function createFormEle(tag,  name, className = "", inner = "", value = "" , forlabel = "", id=""){
     let element = document.createElement(tag)
-    
+    // check for label and set for
     if(tag == 'label'){
         element.for = forlabel
     }
+    // set items
     element.name = name
     element.className = className
     element.textContent = inner
     element.value = value
     element.id = id
 
+    // check for the date inputs and change the following attributes
     if(className == 'editProjectDue' || className == 'addTaskDue'){
         element.type = 'date'
         element.min = format(new Date(), 'yyyy-MM-dd')
         element.value = format(new Date(value), 'yyyy-MM-dd')
     }
+
     return element
 }
 
