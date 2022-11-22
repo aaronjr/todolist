@@ -1,19 +1,24 @@
+import { format, addDays } from 'date-fns'
 import { Project } from "./project";
 import { Task  } from "./task";
 import { Manager } from "./projectManager";
 import { layout } from "./layout"
 import './styles.css';
 
-let proj = new Project("Shop", "Shop in ASDA", "This week");
-let task = new Task("Milk", "Green", "");
-let task1 = new Task("Cheese", "Blue", "");
+const newD = addDays(new Date(), 5)
+const date = format(newD, 'MM/dd/yyyy')
+
+
+let proj = new Project("Shop", "Shop in ASDA", `${date}`);
+let task = new Task("Milk", "Green", `${date}`);
+let task1 = new Task("Cheese", "Blue",`${date}`);
 
 // hide one task
 task.outstanding = false
 
-let proj2 = new Project("Garden", "Carry out tonight", "Tonight")
-let task2 = new Task("Mow", "Grass out of the back", "ASAP")
-let task12 = new Task("Cut", "Tree", "soon")
+let proj2 = new Project("Garden", "Carry out tonight", `${date}`)
+let task2 = new Task("Mow", "Grass out of the back", `${date}`)
+let task12 = new Task("Cut", "Tree", `${date}`)
 
 proj.add(task)
 proj.add(task1)

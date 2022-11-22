@@ -173,7 +173,7 @@ body{
 .editProjectForm input{
     margin: 10px;
     flex-grow: 1;
-    padding-left: 15px;
+    padding: 0px 15px;
 }
 
 .editTaskForm button{
@@ -225,7 +225,7 @@ body{
 
 .addTaskForm input{
     margin-right: 15px;
-    padding-left: 10px;
+    padding-left: 0px 10px;
 }
 
 

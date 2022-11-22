@@ -1,3 +1,4 @@
+import { format } from 'date-fns'
 import { createEle, loopForm, clear } from "./createElements"
 import { loadSidebar, addProjects, getTasks } from "./dom"
 import { manager } from "./index"
@@ -9,8 +10,6 @@ export function addProjectForm(side){
     // list of needed items
     const formElements = [
         ['input', 'projectName', 'addProjectDetails',''],
-        //['input', 'description', 'addProjectDetails',''],
-        //['input', 'dueDate', 'addProjectDetails',''],
         ['button', '', 'addButton','Add'],
     ]
 
@@ -116,7 +115,7 @@ export function editProjectForm (project) {
         // update details
         thisProject.edit('title', newTitle)
         thisProject.edit('description', newDes)
-        thisProject.edit('dueDate', newDate)
+        thisProject.edit('dueDate', format(new Date(newDate), 'dd/MM/yyyy'))
 
        // pass through each item and where to append
         addProjects(project.id)
@@ -167,7 +166,7 @@ export function editTaskForm (thisDiv, project, id) {
         // update details
         thisTask.edit('title', newTitle)
         thisTask.edit('description', newDes)
-        thisTask.edit('dueDate', newDate)
+        thisTask.edit('dueDate', format(new Date(newDate), 'dd/MM/yyyy'))
 
        // add tasks to page
         addProjects(project)
@@ -196,8 +195,6 @@ export function completeTask (project, id) {
 
 export function completeProject(projectId){
     
-    // const thisProject = getTasks(projectId)
-
     manager.list[projectId].edit('outstanding', false)
 
     const content = document.querySelector('.content')
