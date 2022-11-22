@@ -146,8 +146,9 @@ export function loadSidebar(){
     let times = createEle("ul", "list", "")
     
     const timesItems = [
-        ['li', 'list-item today','Today'],
-        ['li', 'list-item week','This week'],
+        ['li', 'list-title','Diary'],
+        ['li', 'side-list-item today',''],
+        ['li', 'side-list-item week',''],
     ]
 
     loop(timesItems, times)
@@ -157,18 +158,31 @@ export function loadSidebar(){
     list.append(createEle('li', 'list-title', "Projects"))
     // pass over each item and add its title to the sidebar list
     objs.forEach( (project) => {
-        list.append(createEle('li', 'list-item project-item', `${project.title}`, `${project.id}`))
+        list.append(createEle('li', 'side-list-item project-item', `${project.title}`, `${project.id}`))
     })
 
     // append to list
     side.append(times)
     side.append(list)
 
-    document.querySelector('.today').addEventListener('click', () => {
+    const today = document.querySelector('.today')
+    today.append(createEle('div', 'todaySVG', ''))
+    today.append(createEle('p', 'side-list-item', 'Today'))
+
+    document.querySelector('.todaySVG').outerHTML = '<svg class="todaySVG" style="width:24px;height:24px;justify-self:center;align-self:center;" viewBox="0 0 24 24"><path fill="currentColor" d="M7,10H12V15H7M19,19H5V8H19M19,3H18V1H16V3H8V1H6V3H5C3.89,3 3,3.9 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5A2,2 0 0,0 19,3Z" /></svg>'
+
+    const week = document.querySelector('.week')
+    week.append(createEle('div', 'weekSVG', ''))
+    week.append(createEle('p', 'side-list-item', 'This week'))
+
+    document.querySelector('.weekSVG').outerHTML = '<svg class="todaySVG" style="width:24px;height:24px;justify-self:center;align-self:center;" viewBox="0 0 24 24"><path fill="currentColor" d="M9,10V12H7V10H9M13,10V12H11V10H13M17,10V12H15V10H17M19,3A2,2 0 0,1 21,5V19A2,2 0 0,1 19,21H5C3.89,21 3,20.1 3,19V5A2,2 0 0,1 5,3H6V1H8V3H16V1H18V3H19M19,19V8H5V19H19M9,14V16H7V14H9M13,14V16H11V14H13M17,14V16H15V14H17Z" /></svg>'
+
+    // add event listeners to diary items
+    today.addEventListener('click', () => {
         inDiary(0)
     })
 
-    document.querySelector('.week').addEventListener('click', () => {
+    week.addEventListener('click', () => {
         inDiary(8)
     })
 

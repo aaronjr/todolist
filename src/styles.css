@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;500;600&display=swap');
 
 :root{
     --green:rgb(182, 247, 86);
@@ -46,7 +46,6 @@ body{
     background-color: rgb(219, 217, 217);
     box-shadow: 0px 3px 10px rgb(169, 168, 168);
     display: flex;
-    align-items: center;
     flex-direction: column;
 }
 
@@ -73,13 +72,16 @@ body{
 .list{
     font-size: x-large;
     margin: 20px 0px;
+    margin-left: 20px;
 }
 
 .addProject{
-    width: 25%;
+    width:50px;
     border-radius: 50%;
     font-size: xx-large;
     border: none;
+    align-self: center;
+    margin-top: 10px;
 }
 
 /* sidebar form */
@@ -107,6 +109,7 @@ body{
 .list-title{
     font-size: xx-large;
     margin-bottom: 10px;
+    font-weight: 500;
 }
 
 /* content */
@@ -129,9 +132,13 @@ body{
     justify-self: center;
 }
 
+.side-list-item{
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
 .projectTitle{
     font-size: 3rem;
-    border-bottom: 2px solid black;
     margin-bottom: 10px;
     width: max-content;
     break-inside: avoid;
@@ -232,7 +239,7 @@ body{
     box-shadow: 0px 3px 10px rgb(169, 168, 168);
     border-radius: 1rem;
     margin: 10px 0px;
-    background-color: rgb(255, 209, 209);
+    background-color: rgb(231, 249, 203);
     min-width: min-content;
 }
 
@@ -271,4 +278,14 @@ body{
 
 .viewProject{
     background-color: var(--green);
+}
+
+.today,
+.week{
+    display: flex;
+}
+
+.todaySVG,
+.weekSVG{
+    margin-right: 5px;
 }
