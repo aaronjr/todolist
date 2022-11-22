@@ -83,11 +83,6 @@ body{
     border: none;
 }
 
-.project-item{
-    text-align: center;
-    cursor: pointer;
-}
-
 /* sidebar form */
 .addProjectForm {
     display: flex;

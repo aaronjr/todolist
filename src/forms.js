@@ -115,7 +115,7 @@ export function editProjectForm (project) {
         // update details
         thisProject.edit('title', newTitle)
         thisProject.edit('description', newDes)
-        thisProject.edit('dueDate', format(new Date(newDate), 'dd/MM/yyyy'))
+        thisProject.edit('dueDate', format(new Date(newDate), 'yyyy-MM-dd'))
 
        // pass through each item and where to append
         addProjects(project.id)
@@ -158,17 +158,18 @@ export function editTaskForm (thisDiv, project, id) {
     form.addEventListener('submit', (e) => {
         // prevent submit
         e.preventDefault()
-
+        
         // get details from form
         let newTitle = form.TaskName.value
         let newDes = form.TaskDescription.value
-        let newDate = form.TaskDue.value
+        let newDate = format(new Date(form.TaskDue.value.toString()), 'yyyy-MM-dd')
 
         // update details
         thisTask.edit('title', newTitle)
         thisTask.edit('description', newDes)
-        thisTask.edit('dueDate', format(new Date(newDate), 'dd/MM/yyyy'))
+        thisTask.edit('dueDate', format(new Date(newDate), 'yyyy-MM-dd'))
 
+        console.log(thisTask)
        // add tasks to page
         addProjects(project)
 

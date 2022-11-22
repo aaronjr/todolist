@@ -6,8 +6,7 @@ import { layout } from "./layout"
 import './styles.css';
 
 const newD = addDays(new Date(), 5)
-const date = format(newD, 'MM/dd/yyyy')
-
+const date = format(newD, 'yyyy-MM-dd')
 
 let proj = new Project("Shop", "Shop in ASDA", `${date}`);
 let task = new Task("Milk", "Green", `${date}`);

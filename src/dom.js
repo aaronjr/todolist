@@ -1,11 +1,11 @@
 import { createEle, loop, clear } from "./createElements"
-import { inWeek } from "./sort"
+import { inDiary } from "./sort"
 import { manager } from './index'
 import { addProjectForm, addTaskForm, editProjectForm, editTaskForm, completeTask, completeProject } from "./forms"
 
 // add projects to content section, list of objects and parent id
 export function addProjects(projectId){
-    inWeek()
+
     // get tasks for project
     const objs = getTasks(projectId)
 
@@ -143,15 +143,34 @@ export function loadSidebar(){
     clear(side)
 
     // create a Node list
+    let times = createEle("ul", "list", "")
+    
+    const timesItems = [
+        ['li', 'list-item today','Today'],
+        ['li', 'list-item week','This week'],
+    ]
+
+    loop(timesItems, times)
+
+    // create a Node list
     let list = createEle("ul", "list", "")
     list.append(createEle('li', 'list-title', "Projects"))
     // pass over each item and add its title to the sidebar list
     objs.forEach( (project) => {
-        list.append(createEle('li', 'project-item', `${project.title}`, `${project.id}`))
+        list.append(createEle('li', 'list-item project-item', `${project.title}`, `${project.id}`))
     })
 
     // append to list
+    side.append(times)
     side.append(list)
+
+    document.querySelector('.today').addEventListener('click', () => {
+        inDiary(0)
+    })
+
+    document.querySelector('.week').addEventListener('click', () => {
+        inDiary(8)
+    })
 
     // button for sidebar, add event listener and add to page
     let addProjectButton = createEle('button', 'addProject', '+')

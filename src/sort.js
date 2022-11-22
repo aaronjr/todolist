@@ -1,44 +1,41 @@
 import { manager } from ".";
-import { isWithinInterval, addDays } from 'date-fns'
+import { isWithinInterval, addDays, parseISO, format } from 'date-fns'
 import { clear } from "./createElements";
+import { loadSidebar } from "./dom";
 
-export function inWeek(){
-
-
+export function inDiary(period){
+    clear(document.querySelector('.content'))
     let list = []
     // loop through outstadning projects
-    manager.checkOutstanding().forEach(project =>{
+    manager.checkOutstanding().forEach( (project) =>{
         // loop through tasks of each project
-        project.checkOutstanding().forEach( task =>{
-
-            // make a date from this expiry
-            const thisDate = new Date(task.dueDate.toString())
-
-            // check if within a week of today
-            if ( isWithinInterval(thisDate,{
-                start: new Date(),
-                end: addDays(new Date(), 8)})
-            )
-            {
+        project.checkOutstanding().forEach( (task) =>{
+            
+            // make a date from this expiry, today and last day needed
+            const thisDate = format(parseISO(task.dueDate), 'dd/MM/yyyy')
+            const today = format(new Date(1), 'dd/MM/yyyy')
+            const lastDay = format(addDays(new Date(1), period),'dd/MM/yyyy')
+            
+            // check if within range
+            if ( isWithinInterval(thisDate,{ start: today, end: lastDay}) ){
                 // add objects to a list with project and task id
                 list.push({
                     'project' : project.id,
                     'task': task.id
                 })
             }
+            
         })
     })
-    // pass list of items within the next week
-    getItems(list)
+    getDiaryItems(list)
 }
 
 // takes list of objects
-export function getItems(list){
+export function getDiaryItems(list){
     
     list.forEach((item) =>{
-        const task = manager.list[`${item.project}`].list[`${item.task}`]
+        let task = manager.list[`${item.project}`].list[`${item.task}`]
         console.log(task.title, task.description, task.dueDate)
     })
 
-    
 }
