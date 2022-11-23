@@ -1,5 +1,5 @@
 import { createEle, loop, clear } from "./createElements"
-import { inDiary } from "./sort"
+import { inDiary } from "./diary"
 import { manager } from './index'
 import { addProjectForm, addTaskForm, editProjectForm, editTaskForm, completeTask, completeProject } from "./forms"
 import check from './check.svg'
@@ -26,11 +26,11 @@ export function addProjects(projectId){
     const projectDetails = [
         ['h1', 'projectTitle', `${tasks.title}`],
         ['p', 'projectDueDate', `Due: ${tasks.dueDate}`],
-        ['p', 'projectDescription', `Description: ${tasks.description}`],
+        ['p', 'projectDescription', ` ${tasks.description}`],
     ]
-
+    // div to hold project buttons
     const projDetailsButtonsHolder = createEle('div', 'projDetailsButtonsHolder', '')
-
+    // buttons
     const projDetailsButtons = [
         ['button', 'editButton editProject', ''],
         ['button', 'completeProject', ''],
@@ -47,6 +47,7 @@ export function addProjects(projectId){
     const compProject = document.querySelector('.completeProject')
     const editProject = document.querySelector('.editProject')
 
+    // edit project details
     editProject.addEventListener('click', () => {
         editProjectForm(manager.list[projectId])
         editProject.style.display = 'none'
@@ -54,35 +55,35 @@ export function addProjects(projectId){
     })
 
     // button to edit this projects details
-   
     compProject.addEventListener('click', () => {
         completeProject(projectId)
     })
-
+    // add SVG
     const checkSVG = createEle('img', 'checkSVG', '')
     checkSVG.src = check
     compProject.append(checkSVG)
 
+    // add SVG
     const tickSVG = createEle('img', 'checkSVG', '')
     tickSVG.src = pen
     editProject.append(tickSVG)
-    // loop through list of tasks
 
+    // loop through list of tasks
     if (objs.checkOutstanding().length == 0){
         // create a "box" for each task
         let box = createEle("div", "empty", "", )
         content.append(box)
 
     }
+    // loop through outstanding tasks
     objs.checkOutstanding().forEach( (obj) => {
 
         // create a "box" for each task
         let box = createEle("div", "box", "", obj.id)
         let list = createEle("ul", `task-list`,'')
-
         let listitems = [
             ['li', `list-item`, `${obj.title}`],
-            ['li', 'list-item desc', `Description: ${obj.description}`,''],
+            ['li', 'list-item desc', obj.description == "" ? '' : `${obj.description}`,''],
             ['li', 'list-item', `Due: ${obj.dueDate}`,''],
         ]
 
@@ -155,7 +156,7 @@ export function addProjects(projectId){
 
         let listitems = [
             ['li', `list-item`, `${obj.title}`],
-            ['li', 'list-item desc', `Description: ${obj.description}`,''],
+            ['li', 'list-item desc ', obj.description == "" ? '' : `${obj.description}`,''],
             ['li', 'list-item', `Due: ${obj.dueDate}`,''],
         ]
 

@@ -1,3 +1,4 @@
+
 export class Manager {
 
     // create empty list for projects or tasks
@@ -12,7 +13,10 @@ export class Manager {
 
      // Create list of outstanding tasks
      checkOutstanding(){
-        let outstand = this.list.filter( (item) => item.outstanding == true )
+        let outstand = this.list.filter( (item) => item.outstanding == true).sort(function(a, b){
+            return a.dueDate.localeCompare(b.dueDate);
+        })
+
         return outstand
     }
 

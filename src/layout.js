@@ -18,8 +18,10 @@ export function layout(){
     document.querySelector('.nav').append(createEle('h1', 'title', 'Project manager.'))
 
     // load sidebar pass all available objects
-    if (manager.list) {
-        addProjects(0)
+    
+    if(manager.checkOutstanding().length > 0){
+        addProjects(manager.checkOutstanding()[0].id)
     }
+    
     loadSidebar()
 }

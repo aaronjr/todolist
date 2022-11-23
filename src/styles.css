@@ -2,7 +2,7 @@
 
 :root{
     --green:rgb(182, 247, 86);
-    --red: rgb(252, 130, 130);
+    --yellow: rgb(244, 246, 141);
     --blue: rgb(175 227 255);
 }
 * {
@@ -83,8 +83,10 @@ body{
     gap: 7px;
 }
 
-.addProjectForm input{
-    padding: 5px 10px;
+.addProjectForm input {
+    width: 130px;
+    padding: 10px 10px;
+    min-width: 10px;
 }
 
 .addButton{
@@ -271,29 +273,31 @@ button{
 button:hover{
     filter: brightness(110%);
     cursor: pointer;
+    transform: translate(5%);
 }
-
 /* green buttons */
-.addTaskButton,
+
 .editProjectButton,
-.addTaskForm button,
-.addProjectForm button,
-.addTask,
-.viewProject{
+.viewProject,
+.editCompleteButton,
+.completeProject{
     background-color: var(--green);
 }
 
  /* blue buttons */
 
-.editButton{
+.editButton,
+.viewProject{
     background-color: var(--blue);
 }
 
-/* red button */
+/* yellow button */
 
-.editCompleteButton,
-.completeProject{
-    background-color: var(--red);
+.addTask,
+.addTaskButton,
+.addTaskForm button,
+.addProjectForm button{
+    background-color: var(--yellow);
 }
 
 /* add project button */

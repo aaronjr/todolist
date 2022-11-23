@@ -1,4 +1,3 @@
-import { format, parseISO } from 'date-fns'
 import { Project } from "./project";
 import { Task  } from "./task";
 import { Manager } from "./projectManager";
@@ -6,10 +5,14 @@ import { layout } from "./layout"
 import { proj, proj2 } from './setup'
 import './styles.css';
 
+// clear storage
+// localStorage.clear();
+
 // onload load page
 document.addEventListener('DOMContentLoaded', () => {
     layout()
 })
+
 // initialize manager
 let manager
 
@@ -25,7 +28,7 @@ if ((localStorage.getItem('manager'))){
         let project = data.list[i]
         const projectNew = new Project(project.title, project.description, project.dueDate, project.outstanding)
         project.list.forEach((task)=>{
-            const taskNew = new Task(task.title, task.description, project.dueDate, task.outstanding)
+            const taskNew = new Task(task.title, task.description, task.dueDate, task.outstanding)
             projectNew.add(taskNew)
         })
         manager.add(projectNew)
@@ -39,8 +42,8 @@ else{
 }
 
 // update to local storage when users closes page
-window.addEventListener("beforeunload", () => {
+window.addEventListener("beforeunload", () => {   
     localStorage.setItem('manager', JSON.stringify(manager));
- }, false);
+ });
 
 export { manager }

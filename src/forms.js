@@ -20,8 +20,8 @@ export function addProjectForm(side){
     form.addEventListener('submit', (e) =>{
         e.preventDefault()
         let projectName = form.projectName.value
-        let description = ""
-        let dueDate = ""
+        let description = `Tasks for ${projectName}`
+        let dueDate = format(new Date(), 'yyyy-MM-dd')
         const project = new Project(projectName, description, dueDate)
         manager.add(project)
         loadSidebar()
@@ -56,7 +56,7 @@ export function addTaskForm(projectId){
         // get values from form
         let taskName = form.TaskName.value
         let description = ""
-        let dueDate = ""
+        let dueDate = format(new Date(), 'yyyy-MM-dd')
         const task = new Task(taskName, description, dueDate)
 
         // Get this project and add task to it

@@ -41,10 +41,8 @@ export function getDiaryItems(list, period){
     }
 
     // through each item of the list and get details of relevant tasks.
-    list.forEach((item) =>{
-
+    list.forEach((item) => {
         let task = manager.list[`${item.project}`].list[`${item.task}`]
-        // console.log(task.title, task.description, task.dueDate)
          
         // create a "box" for each task
         let box = createEle("div", "box diaryBox", "", task.id)
@@ -53,8 +51,8 @@ export function getDiaryItems(list, period){
         // to add to list of each box
         let listitems = [
             ['li', `list-item`, `${task.title}`],
-            ['li', 'list-item desc', `Description: ${task.description}`,''],
-            ['li', 'list-item', `Due: ${task.dueDate}`,''],
+            ['li', 'list-item desc', task.description == "" ? '' : `${task.description}`,''],
+            ['li', 'list-item', `${manager.list[`${item.project}`].title}`,''],
         ]
 
         // button to view main project
