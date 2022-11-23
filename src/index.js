@@ -1,48 +1,46 @@
-import { format, addDays } from 'date-fns'
+import { format, parseISO } from 'date-fns'
 import { Project } from "./project";
 import { Task  } from "./task";
 import { Manager } from "./projectManager";
 import { layout } from "./layout"
+import { proj, proj2 } from './setup'
 import './styles.css';
 
-const newD = addDays(new Date(), 5)
-const date = format(newD, 'yyyy-MM-dd')
-
-const OD = addDays(new Date(), 0)
-const datez = format(OD, 'yyyy-MM-dd')
-
-let proj = new Project("Shop", "Shop in ASDA", `${date}`);
-let task = new Task("Milk", "Green", `${datez}`);
-let task1 = new Task("Cheese", "Blue",`${datez}`);
-
-// hide one task
-task.outstanding = false
-
-let proj2 = new Project("Garden", "Carry out tonight", `${date}`)
-let task2 = new Task("Mow", "Grass out of the back", `${date}`)
-let task12 = new Task("Cut", "Tree", `${date}`)
-
-proj.add(task)
-proj.add(task1)
-
-proj2.add(task2)
-proj2.add(task12)
-
-
-
+// onload load page
 document.addEventListener('DOMContentLoaded', () => {
     layout()
 })
+// initialize manager
+let manager
 
-const manager = new Manager
-manager.add(proj)
-manager.add(proj2)
+// see if already in storage
+if ((localStorage.getItem('manager'))){
 
-localStorage.setItem('manager', JSON.stringify(manager));
-let data = JSON.parse(localStorage.getItem('manager'));
+    // get item
+    let data = JSON.parse(localStorage.getItem('manager'));
 
-for(let object in data.list.length){
-    console.log(data.list[object].list)
+    // loop through and add items from strings into the correct Classes
+    manager = new Manager
+    for (let i in data.list){   
+        let project = data.list[i]
+        const projectNew = new Project(project.title, project.description, project.dueDate, project.outstanding)
+        project.list.forEach((task)=>{
+            const taskNew = new Task(task.title, task.description, project.dueDate, task.outstanding)
+            projectNew.add(taskNew)
+        })
+        manager.add(projectNew)
+    }
 }
+// if not found create new manager and add in the premade projects and tasks
+else{
+    manager = new Manager
+    manager.add(proj)
+    manager.add(proj2)
+}
+
+// update to local storage when users closes page
+window.addEventListener("beforeunload", () => {
+    localStorage.setItem('manager', JSON.stringify(manager));
+ }, false);
 
 export { manager }

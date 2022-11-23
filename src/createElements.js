@@ -42,7 +42,7 @@ export function createFormEle(tag,  name, className = "", inner = "", value = ""
     if(className == 'editProjectDue' || className == 'addTaskDue'){
         element.type = 'date'
         element.min = format(new Date(), 'yyyy-MM-dd')
-        element.value = format(new Date(value), 'yyyy-MM-dd')
+        element.value = format(new Date(value.toString()), 'yyyy-MM-dd')
     }
 
     return element

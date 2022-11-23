@@ -169,7 +169,6 @@ export function editTaskForm (thisDiv, project, id) {
         thisTask.edit('description', newDes)
         thisTask.edit('dueDate', format(new Date(newDate), 'yyyy-MM-dd'))
 
-        console.log(thisTask)
        // add tasks to page
         addProjects(project)
 

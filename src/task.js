@@ -1,10 +1,10 @@
 export class Task {
     // create class items
-    constructor(title, description, dueDate){
+    constructor(title, description, dueDate, outstanding = true){
         this.title = title
         this.description = description
         this.dueDate = dueDate
-        this.outstanding = true
+        this.outstanding = outstanding
         this.id = ""
     }
 
