@@ -13,7 +13,7 @@ export class Manager {
 
      // Create list of outstanding tasks
      checkOutstanding(){
-        let outstand = this.list.filter( (item) => item.outstanding == true).sort(function(a, b){
+        let outstand = this.list.filter( (item) => item.outstanding == true).sort((a, b) => {
             return a.dueDate.localeCompare(b.dueDate);
         })
 
@@ -22,7 +22,9 @@ export class Manager {
 
     // Create list of completed tasks
     checkComplete(){
-        let completed = this.list.filter( (item) => item.outstanding == false)
+        let completed = this.list.filter( (item) => item.outstanding == false).sort((a, b) => {
+            return a.dueDate.localeCompare(b.dueDate);
+        })
         return completed
     }
 
