@@ -28,36 +28,21 @@ proj.add(task1)
 proj2.add(task2)
 proj2.add(task12)
 
-//console.log(window.localStorage)
-// .removeItem('manager')
 
-// function getData(){
-//     let data = {}
-//     if(window.localStorage.getItem("manager")){
-//         let string = window.localStorage.getItem("manager")
-//         const obj = JSON.parse(string)
-//         data = new Manager
-//         for(let i in obj){
-//             console.log(data[i])
-//         }
-//         // console.log(data)
-//     }
-//     else{
-//         // create holder of projects
-//         data = new Manager
-//     }
-//     return data
-// }
-
-// const manager = getData()
-const manager = new Manager
-manager.add(proj)
-manager.add(proj2)
-
-// window.localStorage.setItem("manager", JSON.stringify(manager));
 
 document.addEventListener('DOMContentLoaded', () => {
     layout()
 })
+
+const manager = new Manager
+manager.add(proj)
+manager.add(proj2)
+
+localStorage.setItem('manager', JSON.stringify(manager));
+let data = JSON.parse(localStorage.getItem('manager'));
+
+for(let object in data.list.length){
+    console.log(data.list[object].list)
+}
 
 export { manager }

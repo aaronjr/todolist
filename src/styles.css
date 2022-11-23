@@ -63,6 +63,18 @@ body{
     margin-left: 20px;
 }
 
+.side-list-item{
+    font-size: 1.2rem;
+    cursor: pointer; 
+    break-inside: avoid;
+}
+
+
+.today,
+.week{
+    display: flex;
+}
+
 /* sidebar form */
 .addProjectForm {
     display: flex;
@@ -88,6 +100,12 @@ body{
 }
 
 /* content */
+
+
+.projectDetailsDiv{
+    width: 80%;
+    align-self: center;
+}
 
 .box,
 .complete-box{
@@ -116,7 +134,8 @@ body{
 
 .complete-list{
     width: 100%;
-    display: flex;
+    display: grid;
+    grid-template-columns:repeat(3, 1fr);
     align-items: center;
     justify-content: space-evenly;
     font-size: x-large;
@@ -127,13 +146,12 @@ body{
     filter: brightness(105%);
 }
 
-.list-item{
-    justify-self: center;
+.empty{
+    height: 70px;
 }
 
-.side-list-item{
-    font-size: 1.5rem;
-    cursor: pointer;
+.list-item{
+    justify-self: center;
 }
 
 .projectTitle{
@@ -144,6 +162,12 @@ body{
     width: max-content;
     break-inside: avoid;
 }
+
+.projDetailsButtonsHolder{
+    display: flex;
+    margin-bottom: 10px;
+}
+
 
 .task-list{
     width: 100%;
@@ -199,10 +223,6 @@ body{
     margin-top: 50px ;
 }
 
-.projectDetailsDiv{
-    width: 80%;
-    align-self: center;
-}
 
 /* Diary section */
 
@@ -210,15 +230,6 @@ body{
     grid-template-columns: repeat(3, 1fr) auto;
 }
 
-.today,
-.week{
-    display: flex;
-}
-
-.projDetailsButtonsHolder{
-    display: flex;
-    margin-bottom: 10px;
-}
 
 /* SVG */
 .todaySVG,
@@ -288,8 +299,8 @@ button:hover{
 /* add project button */
 
 .addProject{
-    width:50px;
-    height: 50px;
+    min-width:55px;
+    min-height: 55px;
     border-radius: 50%;
     font-size: xx-large;
     border: none;

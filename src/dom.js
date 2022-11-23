@@ -67,6 +67,13 @@ export function addProjects(projectId){
     tickSVG.src = pen
     editProject.append(tickSVG)
     // loop through list of tasks
+
+    if (objs.checkOutstanding().length == 0){
+        // create a "box" for each task
+        let box = createEle("div", "empty", "", )
+        content.append(box)
+
+    }
     objs.checkOutstanding().forEach( (obj) => {
 
         // create a "box" for each task
@@ -111,7 +118,7 @@ export function addProjects(projectId){
         const tickSVG = createEle('img', 'checkSVG', '')
         tickSVG.src = pen
         edit.append(tickSVG)
-        
+       
         // add divs to ".content"
         content.append(box)
         
@@ -148,7 +155,7 @@ export function addProjects(projectId){
 
         let listitems = [
             ['li', `list-item`, `${obj.title}`],
-            ['li', 'list-item', `Description: ${obj.description}`,''],
+            ['li', 'list-item desc', `Description: ${obj.description}`,''],
             ['li', 'list-item', `Due: ${obj.dueDate}`,''],
         ]
 
