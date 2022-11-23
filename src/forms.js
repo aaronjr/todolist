@@ -93,12 +93,12 @@ export function editProjectForm (project) {
         ['label', '', '', 'Due', '', 'ProjectDue', ''],
         ['input', 'ProjectDue', 'editProjectDue','', `${project.dueDate}`, '', 'ProjectDue'],
         // button
-        ['button', '', 'editProjectButton','Confirm changes'],
+        ['button', '', 'editProjectButton','Save'],
     ]
 
     loopForm(formElements, form)
     // create a container
-    let projectDetailsDiv = document.querySelector('.projectDetailsDiv')
+    let projectDetailsDiv = document.querySelector('.projDetailsButtonsHolder')
 
     form.addEventListener('submit', (e) => {
         // prevent submit
@@ -150,7 +150,7 @@ export function editTaskForm (thisDiv, project, id) {
         ['label', '', '', 'Due:', '', 'TaskDue', ''],
         ['input', 'TaskDue', 'addTaskDue','', `${thisTask.dueDate}`, '', 'TaskDue'],
         // button
-        ['button', '', 'addTaskButton','Confirm changes'],
+        ['button', '', 'addTaskButton','Save'],
     ]
     // add elements to form
     loopForm(formElements, form)

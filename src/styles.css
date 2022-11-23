@@ -13,21 +13,9 @@
     font-weight: 400;
     font-size: 1rem;
 }
-button,
-input{
-    border-radius: 1rem;
-    box-shadow: 0px 3px 10px rgb(216, 213, 213);
-    min-height: min-content;
-    min-width: min-content;
-    border: none;
-}
-button:hover{
-    filter: brightness(110%);
-    cursor: pointer;
-}
 body{
     display: grid;
-    grid-template-columns: 1fr 6fr;
+    grid-template-columns: .9fr 6fr;
     grid-template-rows: 1fr 6fr;
     width: 100vw;
     height: 100vh;
@@ -75,25 +63,12 @@ body{
     margin-left: 20px;
 }
 
-.addProject{
-    width:50px;
-    border-radius: 50%;
-    font-size: xx-large;
-    border: none;
-    align-self: center;
-    margin-top: 10px;
-}
-
 /* sidebar form */
 .addProjectForm {
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 7px;
-}
-
-.addProjectForm button{
-    background-color: var(--green);
 }
 
 .addProjectForm input{
@@ -114,7 +89,8 @@ body{
 
 /* content */
 
-.box{
+.box,
+.complete-box{
     display: grid;
     align-items: center;
     justify-content: stretch;
@@ -123,7 +99,30 @@ body{
     margin: 10px 0px;
     background-color: rgb(255, 252, 252);
     min-width: min-content;
+    width: 80%;
+    align-self: center;
 }
+
+.complete-box,
+.complete-list{
+    height: 50px;
+    border-radius: 1rem;
+    background-color: rgb(231, 249, 203);
+}
+.complete-box{
+    display: grid;
+    grid-template-columns: 1fr;
+}
+
+.complete-list{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    font-size: x-large;
+    justify-self: center;
+}
+
 .box:hover{
     filter: brightness(105%);
 }
@@ -138,6 +137,8 @@ body{
 }
 
 .projectTitle{
+    width: 80%;
+    align-self: center;
     font-size: 3rem;
     margin-bottom: 10px;
     width: max-content;
@@ -149,12 +150,9 @@ body{
     display: grid;
     align-items: center;
     justify-content: space-around;
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(3, 1fr) auto auto;
     font-size: x-large;
     justify-self: center;
-}
-.task-list button{
-    width: 80%;
 }
 
 .editTaskForm,
@@ -179,51 +177,10 @@ body{
     padding: 0px 15px;
 }
 
-.editTaskForm button{
-    margin-right: 10px;
-    padding: 0px 8px;
-    background-color: var(--green);
-}
-
-.editCompleteButton,
-.viewProject{
-    background-color: var(--red);
-    margin: 10px;
-}
-
-.addTask{
-   width: 30%;
-   align-self: center;
-   height: 50px;
-   background-color: var(--green);
-   margin-top: 10px;
-}
-
-.editTaskButton{
-    background-color: var(--blue);
-}
-
-.editProject{
-    padding:0px 14px;
-    background-color: var(--blue);
-    margin: 10px 0px;
-}
-
-.editProjectButton{
-    padding: 0px 7px;
-    margin-right: 15px;
-    background-color: var(--green);
-}
-
 .addTaskForm{
     display: flex;
     justify-content: center;
-}
-
-.addTaskForm button{
-    margin-left: 15px;
-    padding: 10px 14px;
-    background-color: var(--green);
+    margin-top: 10px;
 }
 
 .addTaskForm input{
@@ -231,53 +188,26 @@ body{
     padding-left: 10px;
 }
 
-
-.complete-box{
-    display: grid;
-    align-items: center;
-    justify-content: stretch;
-    box-shadow: 0px 3px 10px rgb(169, 168, 168);
-    border-radius: 1rem;
-    margin: 10px 0px;
-    background-color: rgb(231, 249, 203);
-    min-width: min-content;
-}
-
-.complete-list{
-    width: 100%;
-    display: grid;
-    align-items: center;
-    justify-content: space-around;
-    grid-template-columns: repeat(3, 1fr);
-    font-size: x-large;
-    justify-self: center;
-}
-
 .addTaskDiv{
     display: grid;
     place-items: center;
+    height: 60px;
 }
 
 .completeTitleDiv{
-    margin-top: 10px ;
-}
-
-.completeProject{
-    background-color: var(--red);
-    padding: 0px 7px;
-    margin-left: 10px;
+    text-align: center;
+    margin-top: 50px ;
 }
 
 .projectDetailsDiv{
-    width: minmax(50%, 300px);
+    width: 80%;
+    align-self: center;
 }
+
+/* Diary section */
 
 .diary-list{
-    grid-template-columns: repeat(4, 1fr);
-}
-
-.viewProject{
-    background-color: var(--green);
+    grid-template-columns: repeat(3, 1fr) auto;
 }
 
 .today,
@@ -285,7 +215,84 @@ body{
     display: flex;
 }
 
+.projDetailsButtonsHolder{
+    display: flex;
+    margin-bottom: 10px;
+}
+
+/* SVG */
 .todaySVG,
 .weekSVG{
     margin-right: 5px;
+}
+
+.checkSVG{
+    place-self: center;
+    height: 30px;
+    width: 30px;
+}
+
+.desc{
+    text-align: left;
+    justify-self: start;
+}
+
+/**/
+/* BUTTONS */
+
+button,
+input{
+    border-radius: 1rem;
+    box-shadow: 0px 3px 10px rgb(216, 213, 213);
+    min-height: min-content;
+    min-width: min-content;
+    border: none;
+}
+button{
+    width: 60px;
+    height: 30px;
+    margin: 10px;
+    justify-self: center;
+    align-self: center;
+    display: grid;
+    place-items: center;
+}
+button:hover{
+    filter: brightness(110%);
+    cursor: pointer;
+}
+
+/* green buttons */
+.addTaskButton,
+.editProjectButton,
+.addTaskForm button,
+.addProjectForm button,
+.addTask,
+.viewProject{
+    background-color: var(--green);
+}
+
+ /* blue buttons */
+
+.editButton{
+    background-color: var(--blue);
+}
+
+/* red button */
+
+.editCompleteButton,
+.completeProject{
+    background-color: var(--red);
+}
+
+/* add project button */
+
+.addProject{
+    width:50px;
+    height: 50px;
+    border-radius: 50%;
+    font-size: xx-large;
+    border: none;
+    align-self: center;
+    margin-top: 10px;
 }

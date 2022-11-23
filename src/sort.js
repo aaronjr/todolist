@@ -1,8 +1,8 @@
 import { manager } from ".";
 import { isWithinInterval, addDays, parseISO, format, startOfToday } from 'date-fns'
 import { clear, createEle, loop } from "./createElements";
-import { addProjects, loadSidebar } from "./dom";
-import { da } from "date-fns/locale";
+import { addProjects } from "./dom";
+import eye from './eye.SVG'
 
 export function inDiary(period){
     let list = []
@@ -53,15 +53,19 @@ export function getDiaryItems(list, period){
         // to add to list of each box
         let listitems = [
             ['li', `list-item`, `${task.title}`],
-            ['li', 'list-item', `Description: ${task.description}`,''],
+            ['li', 'list-item desc', `Description: ${task.description}`,''],
             ['li', 'list-item', `Due: ${task.dueDate}`,''],
         ]
 
         // button to view main project
-        const button = createEle('button', 'viewProject', 'View project')
+        const button = createEle('button', 'viewProject', '')
         button.addEventListener('click', () => {
             addProjects(item.project)
         })
+
+        const eyeSVG = createEle('img', 'checkSVG', '')
+        eyeSVG.src = eye
+        button.append(eyeSVG)
 
         // add ul to box element
         box.append(list)

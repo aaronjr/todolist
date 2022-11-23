@@ -2,10 +2,13 @@ import { createEle, loop, clear } from "./createElements"
 import { inDiary } from "./sort"
 import { manager } from './index'
 import { addProjectForm, addTaskForm, editProjectForm, editTaskForm, completeTask, completeProject } from "./forms"
+import check from './check.svg'
+import pen from './pen.svg'
+import plus from './plus.svg'
+import listSVG from './list.svg'
 
 // add projects to content section, list of objects and parent id
 export function addProjects(projectId){
-
     // get tasks for project
     const objs = getTasks(projectId)
 
@@ -24,17 +27,26 @@ export function addProjects(projectId){
         ['h1', 'projectTitle', `${tasks.title}`],
         ['p', 'projectDueDate', `Due: ${tasks.dueDate}`],
         ['p', 'projectDescription', `Description: ${tasks.description}`],
-        ['button', 'editProject', 'Edit project'],
-        ['button', 'completeProject', 'Complete project'],
     ]
+
+    const projDetailsButtonsHolder = createEle('div', 'projDetailsButtonsHolder', '')
+
+    const projDetailsButtons = [
+        ['button', 'editButton editProject', ''],
+        ['button', 'completeProject', ''],
+    ]
+
+    loop(projDetailsButtons, projDetailsButtonsHolder)
 
     // add details to div add div to content
     loop(projectDetails, projectDetailsDiv)
+    projectDetailsDiv.append(projDetailsButtonsHolder)
     content.append(projectDetailsDiv)
 
     // button to edit this projects details
     const compProject = document.querySelector('.completeProject')
     const editProject = document.querySelector('.editProject')
+
     editProject.addEventListener('click', () => {
         editProjectForm(manager.list[projectId])
         editProject.style.display = 'none'
@@ -46,7 +58,14 @@ export function addProjects(projectId){
     compProject.addEventListener('click', () => {
         completeProject(projectId)
     })
-    
+
+    const checkSVG = createEle('img', 'checkSVG', '')
+    checkSVG.src = check
+    compProject.append(checkSVG)
+
+    const tickSVG = createEle('img', 'checkSVG', '')
+    tickSVG.src = pen
+    editProject.append(tickSVG)
     // loop through list of tasks
     objs.checkOutstanding().forEach( (obj) => {
 
@@ -56,13 +75,13 @@ export function addProjects(projectId){
 
         let listitems = [
             ['li', `list-item`, `${obj.title}`],
-            ['li', 'list-item', `Description: ${obj.description}`,''],
+            ['li', 'list-item desc', `Description: ${obj.description}`,''],
             ['li', 'list-item', `Due: ${obj.dueDate}`,''],
         ]
 
         // buttons
-        let edit = createEle('button', 'editTaskButton', 'Edit task', obj.id)
-        let complete = createEle('button', 'editCompleteButton', 'Complete task', obj.id)
+        let edit = createEle('button', 'editButton editTaskButton', '', obj.id)
+        let complete = createEle('button', 'editCompleteButton', '', obj.id)
         
         edit.addEventListener('click', () => {
             if(!(document.querySelector('.editTaskForm'))){
@@ -85,13 +104,26 @@ export function addProjects(projectId){
         list.append(edit)
         list.append(complete)
 
+        const checkSVG = createEle('img', 'checkSVG', '')
+        checkSVG.src = check
+        complete.append(checkSVG)
+
+        const tickSVG = createEle('img', 'checkSVG', '')
+        tickSVG.src = pen
+        edit.append(tickSVG)
+        
         // add divs to ".content"
         content.append(box)
+        
     })
 
     const addTaskDiv = createEle('div', 'addTaskDiv', '')
     // add task button
-    let addTask = createEle('button', 'addTask', 'Add task')
+    let addTask = createEle('button', 'addTask', '')
+    const addListSVG = createEle('img', 'checkSVG', '')
+    addListSVG.src = listSVG
+    addTask.append(addListSVG)
+
     addTask.addEventListener('click', () => {
         if(!(document.querySelector('.addTaskForm'))){
             addTaskForm(projectId)
@@ -187,7 +219,11 @@ export function loadSidebar(){
     })
 
     // button for sidebar, add event listener and add to page
-    let addProjectButton = createEle('button', 'addProject', '+')
+    let addProjectButton = createEle('button', 'addProject', '')
+    const plusSVG = createEle('img', 'checkSVG', '')
+    plusSVG.src = plus
+    addProjectButton.append(plusSVG)
+
     addProjectButton.addEventListener('click', () => {
         if(!(document.querySelector('.addProjectForm'))){
             // load the correct todo list from the projects
