@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@200;400;600&display=swap');
 
 :root{
     --green:rgb(182, 247, 86);
@@ -9,14 +9,14 @@
     margin: 0;
     padding: 0px;
     list-style-type: none;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Inter', sans-serif;
     font-weight: 400;
     font-size: 1rem;
 }
 body{
     display: grid;
     grid-template-columns: .9fr 6fr;
-    grid-template-rows: 1fr 6fr;
+    grid-template-rows: 120px 6fr;
     width: 100vw;
     height: 100vh;
 }
@@ -27,7 +27,7 @@ body{
     grid-column-end: 3;
     display: grid;
     place-items: center;
-    
+    position: relative;
 }
 
 .side{
@@ -99,6 +99,7 @@ body{
     font-size: xx-large;
     margin-bottom: 10px;
     font-weight: 500;
+    margin-right: 50px;
 }
 
 /* content */
@@ -160,7 +161,6 @@ body{
     width: 80%;
     align-self: center;
     font-size: 3rem;
-    margin-bottom: 10px;
     width: max-content;
     break-inside: avoid;
 }
@@ -310,4 +310,59 @@ button:hover{
     border: none;
     align-self: center;
     margin-top: 10px;
+}
+
+.menu{
+    height: 50px;
+    width: 50px;
+    background-color: white;
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+
+}
+
+@media screen and (max-width: 1000px)
+{
+    .nav
+    {
+        background-color: red;
+    }
+
+    body
+    {
+        grid-template-columns: 6fr;
+    }
+
+    .side
+    {
+        display: none;
+    }
+
+    .showSide{
+        background-color: pink;
+        position: absolute;
+        top: 120px;
+        left: 0;
+    }
+}
+
+@media screen and (min-width: 999px){
+    .nav{
+        background-color: blue;
+    }
+
+    .menu{
+    display: none;
+    }
+
+    .side{
+        display: block;
+    }
+
+    .showSide{
+        background-color: rgb(219, 217, 217);
+        position: static;
+        display: block;
+    }
 }

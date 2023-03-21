@@ -1,4 +1,3 @@
-
 export class Manager {
 
     // create empty list for projects or tasks
