@@ -32,4 +32,4 @@ proj.add(task2)
 proj2.add(task21)
 proj2.add(task22)
 
-export { proj, proj2}
+export {proj, proj2}

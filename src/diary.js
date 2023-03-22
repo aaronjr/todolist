@@ -1,10 +1,5 @@
 import { manager } from ".";
-import {
-  isWithinInterval,
-  addDays,
-  parseISO,
-  startOfToday,
-} from "date-fns";
+import { isWithinInterval, addDays, parseISO, startOfToday } from "date-fns";
 import { clear, createEle, loop } from "./createElements";
 import { addProjects } from "./dom";
 import eye from "./eye.SVG";
@@ -88,4 +83,16 @@ export function getDiaryItems(list, period) {
 
     document.querySelector(".content").append(box);
   });
+
+  // check for nothing in diary
+  if (list.length == 0) {
+    let box = createEle("div", "empty", "");
+    // set message
+    let messageContent =
+      period === 8 ? "Nothing due this week" : "Nothing due today";
+    let message = createEle("h3", "noTasks", `${messageContent}`, "");
+    // add to page
+    box.append(message);
+    document.querySelector(".content").append(box);
+  }
 }
