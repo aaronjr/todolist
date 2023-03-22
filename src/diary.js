@@ -77,7 +77,7 @@ export function getDiaryItems(list, period) {
     eyeSVG.src = eye;
     button.append(eyeSVG);
 
-    // add ul to box element
+    // add list to box element
     box.append(list);
 
     // add to body and box div

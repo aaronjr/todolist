@@ -25,7 +25,7 @@ export function addProjects(projectId){
     // add project name to page
     const projectDetails = [
         ['h1', 'projectTitle', `${tasks.title}`],
-        ['p', 'projectDueDate', `Due: ${tasks.dueDate}`],
+        ['p', 'projectDueDate', `${tasks.dueDate}`],
         ['p', 'projectDescription', ` ${tasks.description}`],
     ]
     // div to hold project buttons
@@ -157,12 +157,12 @@ export function addProjects(projectId){
 
         // create a "box" for each task
         let box = createEle("div", "complete-box", "", '')
-        let list = createEle("ul", `complete-list`,'')
+        let list = createEle("div", `complete-list`,'')
 
         let listitems = [
-          ["li", `list-item`, `${obj.title}`],
-          ["li", "list-item", `Due: ${obj.dueDate}`, ""],
-          ["li", "list-item desc ", obj.description == "" ? "" : `${obj.description}`, ""]
+          ["div", `list-item`, `${obj.title}`],
+          ["div", "list-item", `Due: ${obj.dueDate}`, ""],
+          ["div", "list-item desc ", obj.description == "" ? "" : `${obj.description}`, ""]
         ];
 
         // add ul to box element

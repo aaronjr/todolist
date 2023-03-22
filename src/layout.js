@@ -37,7 +37,7 @@ export function layout() {
 
     // change based on show's status
     show == true
-      ? (document.querySelector(".side").style.display = "block")
+      ? (document.querySelector(".side").style.display = "flex")
       : (document.querySelector(".side").style.display = "none");
   });
 
@@ -46,11 +46,11 @@ export function layout() {
     // if smaller than 999px show based on show variable
     if (window.innerWidth < "999") {
       show == true
-        ? (document.querySelector(".side").style.display = "block")
+        ? (document.querySelector(".side").style.display = "flex")
         : (document.querySelector(".side").style.display = "none");
     } else {
       // else always block
-      document.querySelector(".side").style.display = "block";
+      document.querySelector(".side").style.display = "flex";
     }
   });
 

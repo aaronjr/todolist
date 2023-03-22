@@ -4,6 +4,10 @@
     --green:rgb(182, 247, 86);
     --yellow: rgb(244, 246, 141);
     --blue: rgb(175 227 255);
+    --lightGrey: #f4f4f4;
+    --pink: #ff8381;
+     --orange: #f9ac66; 
+    /* --red: #ED6B5B; */
 }
 * {
     margin: 0;
@@ -22,7 +26,7 @@ body{
 }
  /* main structure */
 .nav{
-    background-color: rgb(87, 87, 87);
+    background-color: var(--orange);
     grid-column-start: 1;
     grid-column-end: 3;
     display: grid;
@@ -31,14 +35,14 @@ body{
 }
 
 .side{
-    background-color: rgb(219, 217, 217);
-    box-shadow: 0px 3px 10px rgb(169, 168, 168);
+    background-color: var(--lightGrey);
     display: flex;
     flex-direction: column;
+    color: black;
 }
 
 .content{
-    background-color: rgb(235, 235, 235);
+    background-color: white;
     display: flex;
     flex-direction: column;
     padding: 1rem 1rem;
@@ -102,10 +106,21 @@ body{
 
 /* content */
 
-
+.projectDescription{
+    margin-bottom: 20px;
+    font-size: 1.3rem;
+}
 .projectDetailsDiv{
     width: 90%;
+    border-bottom: solid 3px rgb(87, 87, 87);
     align-self: center;
+    padding: 10px;
+    margin-bottom: 20px;
+}
+
+.projectDueDate{
+    padding-bottom: 10px;
+    font-style: italic;
 }
 
 .box,
@@ -300,6 +315,11 @@ button:hover{
 .completeProject{
     background-color: var(--green);
 }
+.editProject,
+.completeProject{
+    margin: 0;
+    margin-right: 5px;
+}
 
  /* blue buttons */
 
@@ -328,6 +348,7 @@ button:hover{
     border: none;
     align-self: center;
     margin-top: 10px;
+    background-color: white;
 }
 
 .menu{
@@ -366,6 +387,7 @@ button:hover{
         position: absolute;
         top: 120px;
         left: 0;
+        height: calc(100% - 120px);
     }
 }
 
@@ -375,11 +397,11 @@ button:hover{
     }
 
     .side{
-        display: block;
+        display: flex;
+        box-shadow: 0px 3px 10px rgb(169, 168, 168);
     }
 
     .showSide{
-        background-color: rgb(219, 217, 217);
-        display: block;
+        display: flex;
     }
 }
