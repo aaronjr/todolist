@@ -41,8 +41,6 @@ body{
     background-color: rgb(235, 235, 235);
     display: flex;
     flex-direction: column;
-    max-width: 100%;
-    max-height: 100%;
     padding: 1rem 1rem;
     overflow: scroll;
 }
@@ -106,30 +104,31 @@ body{
 
 
 .projectDetailsDiv{
-    width: 80%;
+    width: 90%;
     align-self: center;
 }
 
 .box,
 .complete-box{
     display: grid;
+    grid-template-columns: 4fr repeat(2, 1fr);
     align-items: center;
     justify-content: stretch;
     box-shadow: 0px 3px 10px rgb(169, 168, 168);
     border-radius: 1rem;
     margin: 10px 0px;
     background-color: rgb(255, 252, 252);
-    min-width: min-content;
-    width: 80%;
     align-self: center;
+    padding-top: 10px;
+    width: clamp(350px, 1200px, 90%)
 }
 
 .complete-box,
 .complete-list{
-    height: 50px;
     border-radius: 1rem;
     background-color: rgb(231, 249, 203);
 }
+
 .complete-box{
     display: grid;
     grid-template-columns: 1fr;
@@ -138,7 +137,8 @@ body{
 .complete-list{
     width: 100%;
     display: grid;
-    grid-template-columns:repeat(3, 1fr);
+    grid-template-columns:repeat(2, 1fr);
+    grid-template-rows: 1fr auto;
     align-items: center;
     justify-content: space-evenly;
     font-size: x-large;
@@ -154,7 +154,7 @@ body{
 }
 
 .list-item{
-    justify-self: center;
+    padding-left: 10px;
 }
 
 .projectTitle{
@@ -176,24 +176,27 @@ body{
     display: grid;
     align-items: center;
     justify-content: space-around;
-    grid-template-columns: repeat(3, 1fr) auto auto;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto;
     font-size: x-large;
     justify-self: center;
 }
 
 .editTaskForm,
 .editProjectForm{
-    display: flex;
-    justify-content: stretch;
+    display: grid;
     align-items: center;
+    grid-column: span 3;
+    grid-template-columns: 1fr 3fr;
+    padding: 10px;
 }
 
 .editTaskForm label,
 .editProjectForm label{
-    width: min-content;
+    /* width: min-content;
     justify-self: flex-end;
     margin: 10px;
-    margin-right: 0px;
+    margin-right: 0px; */
 }
 
 .editTaskForm input,
@@ -246,8 +249,22 @@ body{
 }
 
 .desc{
-    text-align: left;
-    justify-self: start;
+    padding-top: 10px;
+    padding-bottom:20px;
+    padding-right: 10px;
+    grid-column: span 2;
+    font-size: large;
+}
+
+.task-title{
+    font-weight: bold;
+}
+
+.task-date{
+    font-style: italic;
+        font-weight: 200;
+        white-space: nowrap;
+        overflow: visible;
 }
 
 /**/
@@ -298,6 +315,7 @@ button:hover{
 .addTaskForm button,
 .addProjectForm button{
     background-color: var(--yellow);
+    grid-column: span 2;
 }
 
 /* add project button */
@@ -316,8 +334,8 @@ button:hover{
     height: 22px;
     width: 30px;
     position: absolute;
-    bottom: 20px;
-    left: 20px;
+    bottom: 15px;
+    left: 15px;
     display: grid;
     grid-template-rows: repeat(3, 1fr);
     gap: 5px;

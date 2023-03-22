@@ -80,12 +80,17 @@ export function addProjects(projectId){
 
         // create a "box" for each task
         let box = createEle("div", "box", "", obj.id)
-        let list = createEle("ul", `task-list`,'')
+        let list = createEle("div", `task-list`,'')
         let listitems = [
-            ['li', `list-item`, `${obj.title}`],
-            ['li', 'list-item desc', obj.description == "" ? '' : `${obj.description}`,''],
-            ['li', 'list-item', `Due: ${obj.dueDate}`,''],
-        ]
+          ["div", `list-item task-title`, `${obj.title}`],
+          ["div", "list-item task-date", `${obj.dueDate}`, ""],
+          [
+            "div",
+            "list-item desc",
+            obj.description == "" ? "" : `${obj.description}`,
+            "",
+          ],
+        ];
 
         // buttons
         let edit = createEle('button', 'editButton editTaskButton', '', obj.id)
@@ -109,8 +114,8 @@ export function addProjects(projectId){
 
         // add to body and box div
         loop(listitems, list)
-        list.append(edit)
-        list.append(complete)
+        box.append(edit)
+        box.append(complete)
 
         const checkSVG = createEle('img', 'checkSVG', '')
         checkSVG.src = check
@@ -155,10 +160,10 @@ export function addProjects(projectId){
         let list = createEle("ul", `complete-list`,'')
 
         let listitems = [
-            ['li', `list-item`, `${obj.title}`],
-            ['li', 'list-item desc ', obj.description == "" ? '' : `${obj.description}`,''],
-            ['li', 'list-item', `Due: ${obj.dueDate}`,''],
-        ]
+          ["li", `list-item`, `${obj.title}`],
+          ["li", "list-item", `Due: ${obj.dueDate}`, ""],
+          ["li", "list-item desc ", obj.description == "" ? "" : `${obj.description}`, ""]
+        ];
 
         // add ul to box element
         box.append(list)

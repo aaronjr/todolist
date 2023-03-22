@@ -44,7 +44,7 @@ export function layout() {
   // listen for window resize
   window.addEventListener("resize", () => {
     // if smaller than 999px show based on show variable
-    if (window.innerWidth < '999') {
+    if (window.innerWidth < "999") {
       show == true
         ? (document.querySelector(".side").style.display = "block")
         : (document.querySelector(".side").style.display = "none");
