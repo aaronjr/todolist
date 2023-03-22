@@ -70,7 +70,6 @@ body{
 .side-list-item{
     font-size: 1.2rem;
     cursor: pointer; 
-    break-inside: avoid;
 }
 
 
@@ -190,11 +189,9 @@ body{
 }
 
 .projectTitle{
-    width: 80%;
     align-self: center;
     font-size: 3rem;
-    width: max-content;
-    break-inside: avoid;
+    margin-bottom: 5px;
 }
 
 .projDetailsButtonsHolder{
@@ -413,6 +410,9 @@ button:hover{
         top: 120px;
         left: 0;
         height: calc(100% - 120px);
+        max-width: 50%;
+        padding-right: 10px;
+        width: 192px;
     }
 }
 
