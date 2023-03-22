@@ -6,6 +6,7 @@ import check from './check.svg'
 import pen from './pen.svg'
 import plus from './plus.svg'
 import listSVG from './list.svg'
+import { hideSide } from "./layout"
 
 // add projects to content section, list of objects and parent id
 export function addProjects(projectId){
@@ -226,10 +227,12 @@ export function loadSidebar(){
 
     // add event listeners to diary items
     today.addEventListener('click', () => {
+            hideSide();
         inDiary(0)
     })
 
     week.addEventListener('click', () => {
+        hideSide();
         inDiary(8)
     })
 
@@ -257,6 +260,7 @@ export function loadSidebar(){
             // pass the id number and the node of where
             // the content should be loaded ".content"
             addProjects(item.getAttribute("id"))
+            hideSide();
         })
     })
 }

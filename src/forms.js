@@ -2,6 +2,7 @@ import { format } from 'date-fns'
 import { createEle, loopForm, clear } from "./createElements"
 import { loadSidebar, addProjects, getTasks } from "./dom"
 import { manager } from "./index"
+import { hideSide } from './layout'
 import { Project } from './project'
 import { Task } from "./task"
 
@@ -26,6 +27,7 @@ export function addProjectForm(side){
         manager.add(project)
         loadSidebar()
         addProjects(manager.list.length - 1)
+        hideSide()
     })
     
     // add to correct location

@@ -10,6 +10,15 @@ const mainStructure = [
   ["div", "content", ""],
 ];
 
+// variable to set if user wants to show sidebar on smaller screen
+let show = false;
+
+export function hideSide() {
+  if (window.innerWidth < "999") {
+    document.querySelector(".side").style.display = "none";
+    show = false;
+  }
+}
 export function layout() {
   // loop through list and add to body
   loop(mainStructure, body);
@@ -27,9 +36,6 @@ export function layout() {
   document.querySelector(".menu").append(createEle("div", "piece", ""));
   document.querySelector(".menu").append(createEle("div", "piece", ""));
   document.querySelector(".menu").append(createEle("div", "piece", ""));
-
-  // variable to set if user wants to show sidebar on smaller screen
-  let show = false;
 
   document.querySelector(".menu").addEventListener("click", () => {
     // set show

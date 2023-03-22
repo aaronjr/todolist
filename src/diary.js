@@ -40,11 +40,13 @@ export function getDiaryItems(list, period) {
   if (period == 8) {
     document
       .querySelector(".content")
-      .append(createEle("h1", "projectTitle", "Tasks due this week"));
+      .append(
+        createEle("h1", "projectTitle diaryTitle", "Tasks due this week")
+      );
   } else {
     document
       .querySelector(".content")
-      .append(createEle("h1", "projectTitle", "Tasks due today"));
+      .append(createEle("h1", "projectTitle diaryTitle", "Tasks due today"));
   }
 
   // through each item of the list and get details of relevant tasks.
