@@ -72,7 +72,9 @@ export function addProjects(projectId){
     if (objs.checkOutstanding().length == 0){
         // create a "box" for each task
         let box = createEle("div", "empty", "", )
-        content.append(box)
+        let message = createEle("h3", "noTasks", "No outstanding tasks", "");
+        box.append(message);
+        content.append(box);
 
     }
     // loop through outstanding tasks
@@ -161,7 +163,7 @@ export function addProjects(projectId){
 
         let listitems = [
           ["div", `list-item`, `${obj.title}`],
-          ["div", "list-item", `Due: ${obj.dueDate}`, ""],
+          ["div", "list-item compDate", ``, ""],
           ["div", "list-item desc ", obj.description == "" ? "" : `${obj.description}`, ""]
         ];
 
