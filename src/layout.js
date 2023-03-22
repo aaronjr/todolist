@@ -19,7 +19,7 @@ export function layout() {
   // add title to page
   document
     .querySelector(".nav")
-    .append(createEle("h1", "title", "Project manager"));
+    .append(createEle("h1", "title", "EasyDays"));
 
   // hamburger menu
   document.querySelector(".nav").append(createEle("div", "menu", ""));
